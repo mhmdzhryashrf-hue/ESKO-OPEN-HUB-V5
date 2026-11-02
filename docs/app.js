@@ -104,11 +104,15 @@
     return digest === record.digest;
   }
 
+  async function continueAfterAccessPin() {
+    const lock = await store.get('settings', 'localLock').catch(() => null);
+    if (lock?.enabled) showLock(); else showApp();
+  }
+
   async function enterAfterIntro() {
     clearInterval(introTimer);
     if (introOscillator) { try { introOscillator.stop(); } catch (_) {} introOscillator = null; }
-    const lock = await store.get('settings', 'localLock').catch(() => null);
-    if (lock?.enabled) showLock(); else showApp();
+    await continueAfterAccessPin();
   }
 
   function startIntro() {
@@ -413,7 +417,7 @@
     };
     const blob = new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
     const url = URL.createObjectURL(blob); const link = document.createElement('a');
-    link.href=url; link.download=`ESKO-V5.0-LOCAL-BACKUP-${new Date().toISOString().slice(0,10)}.json`;
+    link.href=url; link.download=`ESKO-V6.0-LOCAL-BACKUP-${new Date().toISOString().slice(0,10)}.json`;
     document.body.append(link); link.click(); link.remove(); URL.revokeObjectURL(url);
     toast('تم تجهيز نسخة البيانات المحلية.');
   }
@@ -463,8 +467,8 @@
     const [name] = command.trim().split(/\s+/);
     const commands = {
       help: 'الأوامر الآمنة: help, about, version, time, storage, clear',
-      about: 'ESKO OPEN HUB V5.0 — إضافة واجهة تجريبية.',
-      version: 'ESKO V5.0 ADD-ON / API local prototype',
+      about: 'ESKO OPEN HUB V6.0 — أكاديمية التعليم والبرمجة.',
+      version: 'ESKO V6.0 EDUCATION UPDATE / API local prototype',
       time: new Date().toLocaleString('ar-EG'),
       storage: 'التخزين: IndexedDB على نفس أصل الموقع؛ راجع إعدادات المتصفح للمساحة.',
       clear: '__CLEAR__'

@@ -1,5 +1,12 @@
 [
   {
+    "id": "esko-survival-arena",
+    "name": "ESKO Survival Arena",
+    "category": "بقاء ومغامرة",
+    "engine": "survival",
+    "ready": true
+  },
+  {
     "id": "esko-sky-dash",
     "name": "ESKO Sky Dash",
     "category": "أركيد",
