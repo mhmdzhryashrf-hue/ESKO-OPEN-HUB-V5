@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const base=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>JSON.parse(fs.readFileSync(path.join(base,p),'utf8'));
+const games=read('public/v5/games.json');
+const bots=read('public/v5/bots.json');
+const tools=read('public/v5/tools.json');
+const source=fs.readFileSync(path.join(base,'public/v5/esko-v5.js'),'utf8');
+const html=fs.readFileSync(path.join(base,'public/index.html'),'utf8');
+const app=fs.readFileSync(path.join(base,'public/app.js'),'utf8');
+assert.equal(games.length,50,'catalog must contain 50 games');
+assert.equal(new Set(games.map(x=>x.id)).size,50,'game ids must be unique');
+assert.equal(bots.length,50,'catalog must contain 50 bot templates');
+assert.equal(new Set(bots.map(x=>x.id)).size,50,'bot ids must be unique');
+assert.equal(Object.keys(tools).length,10,'tool catalog must contain 10 sections');
+for(const [key,group] of Object.entries(tools)){
+  assert.ok(group.label&&Array.isArray(group.items),`${key} must have a label and items`);
+  assert.equal(group.items.length,100,`${key} must contain 100 catalog cards`);
+  assert.equal(new Set(group.items).size,100,`${key} items must be unique`);
+}
+assert.equal(Object.values(tools).reduce((n,x)=>n+x.items.length,0),1000,'exactly 1000 tool cards');
+assert.equal(games.filter(x=>x.ready).length,10,'10 local game implementations are bundled');
+for(const game of games.filter(x=>x.ready))assert.ok(source.includes(`case '${game.engine}':`),`${game.id} ready engine must be routed`);
+assert.ok(source.includes('/api/health'),'V5 extension must use the shared backend health endpoint');
+assert.ok(source.includes('1000 بطاقة'),'tool UI must disclose catalog count');
+assert.ok(html.includes('V5.0')&&html.includes('networkGate')&&html.includes('page-disclaimer'),'V5 shell, network gate and disclaimer must be present');
+assert.ok(html.includes('image-processor.js')&&app.includes('300 * 1024'),'image pipeline and 300KB target must be wired');
+assert.ok(app.includes('MIN_NETWORK_BYTES_PER_SECOND=2048'),'2KB/s network gate must be configured');
+for(const file of ['public/v5/esko-v5.js','public/v5/esko-v5.css','public/image-processor.js','backend/server.mjs','android/app/src/main/java/com/esko/openhub/MainActivity.java','Dockerfile','README-AR.md','bots/catalog.json','bots/generate-bots.cjs','bots/auto-links.cjs'])assert.ok(fs.existsSync(path.join(base,file)),`missing ${file}`);
+console.log('PASS: V5 package structure, 1000 tool cards/10 groups, 50 games/10 playable, 50 bot templates, network gate, image processing and Android source.');

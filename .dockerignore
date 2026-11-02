@@ -1,0 +1,10 @@
+.git
+.gitignore
+android/.gradle
+android/.idea
+android/**/build
+backend/data
+*.zip
+*.apk
+*.aab
+node_modules

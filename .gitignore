@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+node_modules/
+backend/data/
+*.log
+.env
+.env.*
+!.env.example
+android/.gradle/
+android/.idea/
+android/local.properties
+android/**/build/
+android/app/release/
+*.apk
+*.aab
+*.jks
+*.keystore

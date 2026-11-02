@@ -1,0 +1,17 @@
+{
+  "name": "esko-open-hub",
+  "version": "5.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ESKO OPEN HUB V5.0 unified web and Android WebView source",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node backend/server.mjs",
+    "dev": "ESKO_HOST=127.0.0.1 ESKO_PORT=8788 node backend/server.mjs",
+    "check": "node --check backend/server.mjs && node --check public/app.js && node --check public/store.js && node --check public/image-processor.js && node --check public/v5/esko-v5.js && node --check bots/auto-links.cjs && node --check bots/generate-bots.cjs",
+    "test:catalog": "node tests/check-package.js",
+    "test:api": "node tests/v5-integration.mjs",
+    "test:smoke": "node tests/smoke-test.mjs",
+    "test": "npm run check && npm run test:catalog && npm run test:smoke && npm run test:api"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ESKO OPEN HUB",
+  "version": "5.0.0",
+  "release": "V5.0",
+  "build": "unified-source-preview",
+  "date": "2026-11-02",
+  "web": true,
+  "android_webview_source": true,
+  "backend": "Node.js single-instance JSON persistence",
+  "message_ttl_hours": 7,
+  "profile_image_max_bytes": 307200,
+  "background_image_bytes": 106152,
+  "tool_catalog_cards": 1000,
+  "tool_catalog_sections": 10,
+  "bot_templates": 50,
+  "games_catalog": 50,
+  "games_ready_local": 10,
+  "background_image_limit_bytes": 307200
+}
