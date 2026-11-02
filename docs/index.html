@@ -23,7 +23,7 @@
     <div class="intro-sub">OPEN HUB <span>V5.0</span></div>
     <div class="intro-line"></div>
     <p>منظومتك تبدأ من هنا</p>
-    <a class="intro-support" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">الدعم الفني</a>
+    <a class="intro-support" href="https://wa.me/963993825873" target="_blank" rel="noopener">الدعم الفني</a>
     <button id="skipIntro" class="ghost-button">تخطي المقدمة</button>
     <div class="intro-count" id="introCount">6</div>
   </section>
@@ -39,7 +39,7 @@
         <button class="primary-button" type="submit">فتح التطبيق</button>
       </form>
       <button id="resetLocalLock" class="text-button">إزالة القفل المحلي من هذا المتصفح</button>
-      <a class="lock-support" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">الدعم الفني</a>
+      <a class="lock-support" href="https://wa.me/963993825873" target="_blank" rel="noopener">الدعم الفني</a>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
       </div>
       <label class="terms-accept"><input id="termsAccepted" type="checkbox"> قرأت الشروط وأوافق على الالتزام بها.</label>
       <button id="acceptTerms" class="primary-button" disabled>موافقة ودخول</button>
-      <a class="lock-support" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">الدعم الفني</a>
+      <a class="lock-support" href="https://wa.me/963993825873" target="_blank" rel="noopener">الدعم الفني</a>
     </div>
   </section>
 
@@ -174,17 +174,17 @@
         <section class="page" id="page-support">
           <div class="page-title"><span class="eyebrow">OFFICIAL CHANNELS</span><h1>الدعم والقنوات</h1></div>
           <div class="support-grid">
-            <a class="panel support-card" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener"><span>♕</span><b>القناة الرسمية</b><small>ESKO JOKER</small></a>
+            <a class="panel support-card" href="https://wa.me/963993825873" target="_blank" rel="noopener"><span>♕</span><b>القناة الرسمية</b><small>ESKO JOKER</small></a>
             <a class="panel support-card" href="https://whatsapp.com/channel/0029VbEH9N2LY6d4aZ8FRW0I" target="_blank" rel="noopener"><span>⌘</span><b>أكاديمية البرمجة</b><small>تعلم البرمجة</small></a>
             <a class="panel support-card" href="https://whatsapp.com/channel/0029Vb9NAZoKAwEu7UjBxJ02" target="_blank" rel="noopener"><span>▤</span><b>قناة التعليمات</b><small>أوامر وإرشادات</small></a>
           </div>
-          <a class="primary-link" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">فتح قناة الدعم الرسمية</a>
+          <a class="primary-link" href="https://wa.me/963993825873" target="_blank" rel="noopener">فتح قناة الدعم الرسمية</a>
         </section>
 
         <section class="page" id="page-notes">
           <div class="page-title"><span class="eyebrow">PERSONAL SPACE</span><h1>ملاحظاتك</h1><p>ملاحظاتك محفوظة في وحدة التخزين الداخلية للواجهة على هذا الجهاز.</p></div>
           <div class="panel content-panel"><textarea id="noteInput" rows="9" maxlength="20000" placeholder="اكتب ملاحظتك هنا..."></textarea><div class="form-actions"><button id="saveNote" class="primary-button">حفظ الملاحظة</button><button id="clearNote" class="small-button">مسح النص</button></div><p id="noteState" class="helper-text">لم يتم الحفظ بعد.</p></div>
-          <a class="primary-link" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">افتح قناة الدعم الرسمية</a>
+          <a class="primary-link" href="https://wa.me/963993825873" target="_blank" rel="noopener">افتح قناة الدعم الرسمية</a>
         </section>
 
         <section class="page" id="page-memory">
@@ -232,7 +232,7 @@
       </main>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <a class="v5-support-float" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">✉ الدعم</a>
+    <a class="v5-support-float" href="https://wa.me/963993825873" target="_blank" rel="noopener">✉ الدعم</a>
     <footer class="v5-main-footer">🛡🛠نازلنا بالبدايه والتطوير 🛠🛡</footer>
   </div>
   <audio id="eskoUiAudio" src="assets/esko-interface-theme.mp3" preload="none"></audio>
@@ -240,5 +240,57 @@
   <script src="store.js"></script>
   <script src="app.js"></script>
   <script src="v5/esko-v5.js" defer></script>
+
+<!-- ESKO_RANDOM_SUPPORT_ROUTER -->
+<script>
+(() => {
+  const supportNumbers = [
+    "963993825873",
+    "201226821986",
+    "201128530613"
+  ];
+
+  function chooseSupportNumber() {
+    return supportNumbers[Math.floor(Math.random() * supportNumbers.length)];
+  }
+
+  // Apply to support links/buttons identified by common support labels,
+  // WhatsApp links, or data-support attributes.
+  function prepareSupportLinks() {
+    const candidates = document.querySelectorAll(
+      'a[href*="wa.me/"], a[href*="whatsapp.com/channel/"], [data-support], [data-random-support]'
+    );
+
+    candidates.forEach((element) => {
+      if (element.dataset.eskoRandomSupportReady === "1") return;
+      element.dataset.eskoRandomSupportReady = "1";
+
+      element.addEventListener("click", (event) => {
+        // Only route WhatsApp/support anchors, not unrelated elements.
+        if (element.tagName !== "A") return;
+        const href = element.getAttribute("href") || "";
+        const isSupportLink =
+          element.hasAttribute("data-support") ||
+          element.hasAttribute("data-random-support") ||
+          href.includes("wa.me/") ||
+          href.includes("whatsapp.com/channel/");
+        if (!isSupportLink) return;
+
+        event.preventDefault();
+        const number = chooseSupportNumber();
+        const message = encodeURIComponent("مرحبًا، أحتاج إلى مساعدة بخصوص ESKO OPEN HUB.");
+        window.open("https://wa.me/" + number + "?text=" + message, "_blank", "noopener");
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", prepareSupportLinks);
+  } else {
+    prepareSupportLinks();
+  }
+})();
+</script>
+
 </body>
 </html>

@@ -258,3 +258,16 @@
   $('#ev5-search-clear',root).addEventListener('click',()=>{$('#ev5-google-query',root).value='';$('#ev5-google-results',root).innerHTML='';});
   renderGames();
 })();
+
+
+/* ESKO_RANDOM_SUPPORT_HELPER */
+(() => {
+  const numbers = ["963993825873", "201226821986", "201128530613"];
+  window.ESKORandomSupport = window.ESKORandomSupport || {};
+  window.ESKORandomSupport.open = function () {
+    const number = numbers[Math.floor(Math.random() * numbers.length)];
+    const message = encodeURIComponent("مرحبًا، أحتاج إلى مساعدة بخصوص ESKO OPEN HUB.");
+    window.open("https://wa.me/" + number + "?text=" + message, "_blank", "noopener");
+  };
+})();
+
