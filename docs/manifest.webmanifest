@@ -1,0 +1,10 @@
+{
+  "name": "ESKO OPEN HUB V5.0 Add-on",
+  "short_name": "ESKO V5.0",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090817",
+  "theme_color": "#090817",
+  "lang": "ar",
+  "dir": "rtl"
+}
