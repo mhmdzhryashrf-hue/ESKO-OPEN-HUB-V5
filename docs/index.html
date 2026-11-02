@@ -18,18 +18,12 @@
 
   <section id="intro" class="intro" aria-label="مقدمة ESKO V5.0">
     <div class="intro-grid" aria-hidden="true"></div>
-    <svg class="eagle-mark" viewBox="0 0 640 360" role="img" aria-label="شعار نسر هندسي مرسوم بخطوط متدرجة">
-      <path class="eagle-wing wing-a" d="M320 178 C265 129 180 66 26 48 C70 102 125 143 196 181 C136 168 84 173 22 207 C115 224 198 228 275 213 L320 258"/>
-      <path class="eagle-wing wing-b" d="M320 178 C375 129 460 66 614 48 C570 102 515 143 444 181 C504 168 556 173 618 207 C525 224 442 228 365 213 L320 258"/>
-      <path class="eagle-core" d="M320 84 L350 142 L339 208 L320 270 L301 208 L290 142 Z"/>
-      <path class="eagle-detail" d="M320 86 L320 252 M288 143 L320 168 L352 143 M274 211 L320 231 L366 211"/>
-      <path class="eagle-tail" d="M320 258 L283 317 L320 298 L357 317 Z"/>
-    </svg>
+      <img class="eagle-mark eagle-photo" src="assets/esko-eagle-v5.webp" alt="نسر ESKO" width="720" height="720" fetchpriority="high">
     <div class="intro-mark">ESKO</div>
     <div class="intro-sub">OPEN HUB <span>V5.0</span></div>
     <div class="intro-line"></div>
     <p>منظومتك تبدأ من هنا</p>
-    <a class="intro-support" href="https://wa.me/201128530613" target="_blank" rel="noopener">الدعم الفني</a>
+    <a class="intro-support" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">الدعم الفني</a>
     <button id="skipIntro" class="ghost-button">تخطي المقدمة</button>
     <div class="intro-count" id="introCount">6</div>
   </section>
@@ -45,7 +39,7 @@
         <button class="primary-button" type="submit">فتح التطبيق</button>
       </form>
       <button id="resetLocalLock" class="text-button">إزالة القفل المحلي من هذا المتصفح</button>
-      <a class="lock-support" href="https://wa.me/201128530613" target="_blank" rel="noopener">الدعم الفني</a>
+      <a class="lock-support" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">الدعم الفني</a>
     </div>
   </div>
 
@@ -62,7 +56,7 @@
       </div>
       <label class="terms-accept"><input id="termsAccepted" type="checkbox"> قرأت الشروط وأوافق على الالتزام بها.</label>
       <button id="acceptTerms" class="primary-button" disabled>موافقة ودخول</button>
-      <a class="lock-support" href="https://wa.me/201128530613" target="_blank" rel="noopener">الدعم الفني</a>
+      <a class="lock-support" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">الدعم الفني</a>
     </div>
   </section>
 
@@ -135,7 +129,7 @@
             <div class="setting-row"><div><b>سرعة خطوط جوانب الشاشة</b><small>اضبط السرعة حسب أداء جهازك</small></div><select id="edgeSpeed"><option value="slow">بطيئة</option><option value="medium">متوسطة</option><option value="fast">سريعة</option></select></div>
             <div class="setting-row"><div><b>حركة الأشكال الهندسية</b><small>تقليل الحركة يحافظ على البطارية</small></div><label class="switch"><input id="motionToggle" type="checkbox" checked><span></span></label></div>
             <div class="setting-row"><div><b>تفعيل أصوات الواجهة</b><small>مغلقة افتراضيًا؛ يلزم تفاعل المستخدم للسماح بالتشغيل</small></div><label class="switch"><input id="soundToggle" type="checkbox"><span></span></label></div>
-            <div class="setting-row"><div><b>نوع صوت الخلفية والفتح</b><small>اختر نغمة وجرّبها يدويًا</small></div><select id="backgroundSound"><option value="soft">هادئ</option><option value="ocean">موج بحري</option><option value="space">فضائي</option><option value="off">بدون صوت</option></select></div>
+            <div class="setting-row"><div><b>نوع صوت الخلفية والفتح</b><small>اختر نغمة وجرّبها يدويًا</small></div><select id="backgroundSound"><option value="soft">هادئ</option><option value="ocean">موج بحري</option><option value="space">فضائي</option><option value="uploaded">المقطع الصوتي المرفوع</option><option value="off">بدون صوت</option></select></div>
             <button id="previewSound" type="button" class="small-button">معاينة الصوت</button>
             <div class="setting-row"><div><b>قفل الواجهة بكلمة مرور</b><small>قفل محلي تجريبي، ليس تشفيرًا للملفات</small></div><button id="setLocalLock" class="small-button">إعداد القفل</button></div>
             <div class="setting-row"><div><b>التعرّف على الجهاز الموثوق</b><small>يتطلب دمج Android Keystore في التطبيق الأصلي؛ غير مفعل في الإضافة المستقلة.</small></div><span class="tag">بانتظار الدمج</span></div>
@@ -146,18 +140,31 @@
         <section class="page" id="page-about">
           <div class="page-title"><span class="eyebrow">RELEASE NOTES</span><h1>الإصدار والوصف</h1></div>
           <div class="panel content-panel release-card"><div class="release-number">5.0</div><div><h2>ESKO OPEN HUB</h2><p>دمج واجهة الحساب والمناقشات ومكتبة V5.0 وخيارات الخلفيات في حزمة موحدة.</p><span class="release-state">V5.0 · SOURCE BUILD</span></div></div>
-          <div class="panel content-panel"><h3>المكونات الموجودة في الحزمة</h3><ul class="feature-list"><li>خلفية بحرية متحركة وخيارات خلفيات إضافية قابلة للتغيير.</li><li>شعار نسر هندسي يظهر تدريجيًا في مقدمة مدتها 6 ثوانٍ.</li><li>ضغط الصور الشخصية إلى WebP بحجم أقصى مستهدف 300KB.</li><li>1000 بطاقة كتالوج أدوات موزعة على 10 أقسام؛ ليست كلها محركات تنفيذية.</li><li>50 قالب بوت، و50 لعبة منها 10 ألعاب محلية قابلة للعب.</li><li>حسابات ومناقشات عبر API واحد وتخزين الرسائل 7 ساعات عند استخدام الخادم المشترك.</li><li>واجهة بحث محلية داخل كتالوج المنظومة مع بحث Google اختياري.</li></ul></div>
+          <div class="panel content-panel"><h3>المكونات الموجودة في الحزمة</h3><ul class="feature-list"><li>خلفية بحرية متحركة وخيارات خلفيات إضافية قابلة للتغيير.</li><li>شعار نسر هندسي يظهر تدريجيًا في مقدمة مدتها 6 ثوانٍ.</li><li>ضغط الصور الشخصية إلى WebP بحجم أقصى مستهدف 300KB.</li><li>1000 بطاقة كتالوج أدوات موزعة على 10 أقسام؛ ليست كلها محركات تنفيذية.</li><li>60 قالب بوت، و51 لعبة منها 11 لعبة محلية قابلة للعب.</li><li>حسابات ومناقشات عبر API واحد وتخزين الرسائل 7 ساعات عند استخدام الخادم المشترك.</li><li>واجهة بحث محلية داخل كتالوج المنظومة مع بحث Google اختياري.</li></ul></div>
         </section>
 
         <section class="page" id="page-processor">
           <div class="page-title"><span class="eyebrow">DEVICE & PERFORMANCE</span><h1>نوعية المعالج</h1><p>بيانات المتصفح والجهاز التي يسمح النظام بقراءتها.</p></div>
           <div class="stats-grid"><div class="panel stat-card"><small>أنوية منطقية متاحة</small><strong id="cpuCores">—</strong></div><div class="panel stat-card"><small>الذاكرة المعلنة</small><strong id="deviceMemory">غير متاحة</strong></div><div class="panel stat-card"><small>منصة النظام التي يكشفها المتصفح</small><strong id="cpuArch">غير مكشوفة</strong></div><div class="panel stat-card"><small>حالة الحركة</small><strong id="motionState">مفعّلة</strong></div></div>
+          <div class="panel content-panel">
+            <h3>محركات الموقع المساعدة</h3>
+            <div class="engine-grid">
+              <div class="engine-card"><b>محرك الواجهة</b><small>إدارة التفاعل والتنقل وتحديث العناصر.</small></div>
+              <div class="engine-card"><b>محرك الملفات</b><small>فحص الصور وضغط WebP قبل التخزين.</small></div>
+              <div class="engine-card"><b>محرك الحركة</b><small>دعم اللمس واحترام إعداد تقليل الحركة.</small></div>
+              <div class="engine-card"><b>محرك البيانات</b><small>استخدام IndexedDB وحساب مساحة التخزين عند السماح.</small></div>
+              <div class="engine-card"><b>محرك الاتصال</b><small>عرض حالة الشبكة ونوعها المعلن دون ادعاء تسريع الإنترنت.</small></div>
+            </div>
+            <button id="runEngineDiagnostics" type="button" class="small-button">فحص المحركات الآن</button>
+            <div id="engineDiagnosticOutput" class="engine-results" aria-live="polite">اضغط فحص المحركات لعرض حالة إمكانيات جهازك.</div>
+            <p class="helper-text">هذه طبقة تحسين وفحص للمتصفح؛ لا تنشئ CPU جديدًا ولا تتجاوز حدود الجهاز أو الشبكة.</p>
+          </div>
           <div class="panel content-panel"><h3>محركات المساعدة</h3><div class="assistant-row"><div><b>المحرك الأول · مساعد ESKO</b><small>قواعد محلية وإرشادات ثابتة، بدون اتصال خارجي.</small></div><span class="tag">محلي</span></div><div class="assistant-row"><div><b>المحرك الثاني · مساعد البرمجة</b><small>قواعد مساعدة أولية؛ ليس نموذج ذكاء اصطناعي توليديًا بعد.</small></div><span class="tag">تجريبي</span></div><label class="assistant-input-label">جرّب أحد المحركين<select id="assistantEngine"><option value="esko">مساعد ESKO</option><option value="code">مساعد البرمجة</option></select></label><textarea id="assistantQuestion" rows="3" maxlength="1200" placeholder="اكتب سؤالك..." ></textarea><button id="askAssistant" class="small-button">تشغيل المساعد المحلي</button><div id="assistantAnswer" class="assistant-answer">الردود محلية وقواعدية وليست ناتجة عن نموذج AI توليدي.</div><p class="helper-text">لا يوجد ادعاء بزيادة سرعة CPU أو تشغيل نموذجين AI جاهزين على الهاتف. التحسين الفعلي هنا يعتمد على تقليل إعادة الرسم والحركة غير الضرورية.</p></div>
         </section>
 
         <section class="page" id="page-account">
           <div class="page-title"><span class="eyebrow">IDENTITY</span><h1>الحساب</h1><p>أنشئ اسم مستخدم فريدًا، واحفظ رمز الاسترجاع في مكان آمن.</p></div>
-          <div id="accountStatus" class="panel account-status"><b>غير مسجل الدخول</b><span>التسجيل يحتاج تشغيل الخادم والاتصال به.</span></div>
+          <div id="accountStatus" class="panel account-status"><b>غير مسجل الدخول</b><span>التسجيل يحتاج خادم API منشورًا ومتصلًا.</span></div><p id="accountServiceHint" class="helper-text" role="status">واجهة GitHub Pages تعرض الموقع فقط؛ الحسابات تحتاج إعداد خادم API منفصل.</p>
           <div class="panel content-panel"><h3>إنشاء حساب جديد</h3><form id="registerForm" class="form-grid"><label>الاسم الظاهر<input name="displayName" maxlength="40" required></label><label>اسم المستخدم الفريد<input name="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]+" required></label><label>السن<input name="age" type="number" min="13" max="17" required></label><label>كلمة مرور جديدة<input name="password" type="password" minlength="10" autocomplete="new-password" required></label><button class="primary-button" type="submit">إنشاء الحساب أونلاين</button></form><div id="recoveryReveal" class="recovery-box hidden"></div></div>
           <div class="panel content-panel"><h3>تسجيل الدخول</h3><form id="loginForm" class="form-grid"><label>اسم المستخدم<input name="username" required></label><label>كلمة المرور<input name="password" type="password" required></label><button class="primary-button" type="submit">دخول</button></form><button id="logoutButton" class="text-button">تسجيل الخروج</button></div>
           <div class="panel content-panel"><h3>استرجاع الحساب</h3><form id="recoverForm" class="form-grid"><label>اسم المستخدم<input name="username" required></label><label>رمز الاسترجاع الاحتياطي<input name="recoveryCode" required></label><label>كلمة المرور الجديدة<input name="newPassword" type="password" minlength="10" required></label><button class="small-button" type="submit">استرجاع وتغيير كلمة المرور</button></form></div>
@@ -171,13 +178,13 @@
             <a class="panel support-card" href="https://whatsapp.com/channel/0029VbEH9N2LY6d4aZ8FRW0I" target="_blank" rel="noopener"><span>⌘</span><b>أكاديمية البرمجة</b><small>تعلم البرمجة</small></a>
             <a class="panel support-card" href="https://whatsapp.com/channel/0029Vb9NAZoKAwEu7UjBxJ02" target="_blank" rel="noopener"><span>▤</span><b>قناة التعليمات</b><small>أوامر وإرشادات</small></a>
           </div>
-          <a class="primary-link" href="https://wa.me/201128530613" target="_blank" rel="noopener">فتح محادثة الدعم على واتساب</a>
+          <a class="primary-link" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">فتح قناة الدعم الرسمية</a>
         </section>
 
         <section class="page" id="page-notes">
           <div class="page-title"><span class="eyebrow">PERSONAL SPACE</span><h1>ملاحظاتك</h1><p>ملاحظاتك محفوظة في وحدة التخزين الداخلية للواجهة على هذا الجهاز.</p></div>
           <div class="panel content-panel"><textarea id="noteInput" rows="9" maxlength="20000" placeholder="اكتب ملاحظتك هنا..."></textarea><div class="form-actions"><button id="saveNote" class="primary-button">حفظ الملاحظة</button><button id="clearNote" class="small-button">مسح النص</button></div><p id="noteState" class="helper-text">لم يتم الحفظ بعد.</p></div>
-          <a class="primary-link" href="https://wa.me/201128530613" target="_blank" rel="noopener">تواصل مع حساب الدعم</a>
+          <a class="primary-link" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">افتح قناة الدعم الرسمية</a>
         </section>
 
         <section class="page" id="page-memory">
@@ -215,7 +222,7 @@
 
         <section class="page" id="page-discussions">
           <div class="page-title"><span class="eyebrow">COMMUNITY</span><h1>المناقشات</h1><p>المحادثة العامة، المجموعات بالدعوة، والرسائل الخاصة بطلب قبول.</p></div>
-          <div class="panel content-panel"><div class="tabs"><button class="tab active" data-chat-tab="general">العامة</button><button class="tab" data-chat-tab="groups">المجموعات</button><button class="tab" data-chat-tab="private">الخاص</button></div>
+          <div class="panel notice-panel discussion-service-hint"><span class="notice-icon">i</span><div><b>حالة خدمة المناقشات</b><p>المناقشات تحتاج خادم API وقاعدة بيانات منشورين. GitHub Pages يستضيف ملفات الواجهة فقط، لذلك لن تُرسل الرسائل حتى يتم ربط الخادم.</p></div></div><div class="panel content-panel"><div class="tabs"><button class="tab active" data-chat-tab="general">العامة</button><button class="tab" data-chat-tab="groups">المجموعات</button><button class="tab" data-chat-tab="private">الخاص</button></div>
             <div id="chat-general" class="chat-view"><div id="generalMessages" class="messages"></div><form id="generalForm" class="chat-compose"><input name="message" maxlength="1000" placeholder="اكتب رسالة عامة..." required><button>إرسال</button></form></div>
             <div id="chat-groups" class="chat-view hidden"><form id="createGroupForm" class="inline-form"><input name="name" maxlength="40" placeholder="اسم المجموعة" required><button class="small-button">إنشاء مجموعة</button></form><form id="joinGroupForm" class="inline-form"><input name="invite" placeholder="كود أو رابط الدعوة" required><button class="small-button">انضمام بموافقتك</button></form><div id="groupList" class="group-list"></div><div id="groupChat" class="hidden"><h3 id="groupChatTitle"></h3><div id="groupMessages" class="messages"></div><form id="groupMessageForm" class="chat-compose"><input name="message" maxlength="1000" placeholder="رسالة للمجموعة" required><button>إرسال</button></form></div></div>
             <div id="chat-private" class="chat-view hidden"><form id="dmRequestForm" class="inline-form"><input name="username" placeholder="اسم المستخدم" required><button class="small-button">طلب مراسلة</button></form><div id="dmRequests" class="group-list"></div><div id="dmList" class="group-list"></div><div id="dmChat" class="hidden"><h3 id="dmTitle"></h3><div id="dmMessages" class="messages"></div><form id="dmMessageForm" class="chat-compose"><input name="message" maxlength="1000" placeholder="رسالة خاصة" required><button>إرسال</button></form></div></div>
@@ -225,9 +232,10 @@
       </main>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <a class="v5-support-float" href="https://wa.me/201128530613" target="_blank" rel="noopener">✉ الدعم</a>
+    <a class="v5-support-float" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener">✉ الدعم</a>
     <footer class="v5-main-footer">🛡🛠نازلنا بالبدايه والتطوير 🛠🛡</footer>
   </div>
+  <audio id="eskoUiAudio" src="assets/esko-interface-theme.mp3" preload="none"></audio>
   <script src="image-processor.js"></script>
   <script src="store.js"></script>
   <script src="app.js"></script>

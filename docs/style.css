@@ -48,3 +48,21 @@ body[data-wallpaper="nebula"]::after,body[data-wallpaper="aurora"]::after,body[d
 body.no-motion::after{animation:none!important;transform:translateX(-50%)}
 @media(max-width:560px){body::after{top:31vh;width:17vw;height:17vh;min-width:64px}}
 @media(prefers-reduced-motion:reduce){body::after{animation:none!important}}
+
+
+/* V5.1: realistic eagle splash, responsive processors panel and app-like touch feedback */
+.eagle-photo{display:block;position:relative;z-index:1;width:min(76vw,310px);height:auto;aspect-ratio:1;object-fit:cover;object-position:center 39%;border-radius:26px;border:1px solid rgba(114,226,255,.42);box-shadow:0 12px 48px #0009,0 0 34px rgba(80,233,255,.22),0 0 44px rgba(167,123,255,.13);animation:eaglePhotoReveal 1.15s cubic-bezier(.2,.75,.2,1) both;}
+@keyframes eaglePhotoReveal{from{opacity:0;transform:translateY(14px) scale(.94);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}
+.engine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin:12px 0 16px}
+.engine-card,.engine-result{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);padding:12px;min-width:0}
+.engine-card b,.engine-result b{display:block;font-size:12px;color:var(--text)}
+.engine-card small,.engine-result small{display:block;color:var(--muted);font-size:10px;line-height:1.7;margin-top:6px}
+.engine-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:8px;margin-top:12px}
+.engine-result strong{display:block;color:var(--cyan);font-size:12px;margin-top:6px}
+.discussion-service-hint{margin:12px 0 14px}
+button,.primary-link,.support-card,.icon-button,.nav-item,.quick-card{ -webkit-tap-highlight-color:transparent; touch-action:manipulation }
+button,.primary-link{min-height:42px;transition:transform .12s ease,filter .12s ease,box-shadow .12s ease}
+button:active,.primary-link:active,.support-card:active,.quick-card:active{transform:scale(.975);filter:brightness(1.12)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+@media(max-width:560px){.eagle-photo{width:min(79vw,270px);border-radius:21px}.engine-grid,.engine-results{grid-template-columns:repeat(2,minmax(0,1fr))}.engine-card,.engine-result{padding:10px}}
+@media(prefers-reduced-motion:reduce){.eagle-photo{animation:none!important}.engine-card,.engine-result,button,.primary-link{transition:none!important}}

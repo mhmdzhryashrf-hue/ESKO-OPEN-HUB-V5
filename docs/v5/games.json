@@ -1,5 +1,12 @@
 [
   {
+    "id": "esko-sky-dash",
+    "name": "ESKO Sky Dash",
+    "category": "أركيد",
+    "engine": "skydash",
+    "ready": true
+  },
+  {
     "id": "2048",
     "name": "2048",
     "category": "ألغاز",

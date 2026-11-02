@@ -3,7 +3,8 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const store = window.ESKOStore;
-  const API = '/api';
+  const API = String(window.ESKO_API_BASE || '/api').replace(/\/$/, '');
+  const isGitHubPages = /(^|\.)github\.io$/i.test(location.hostname);
   let currentUser = null;
   let currentGroup = null;
   let currentDM = null;
@@ -12,6 +13,8 @@
   let introTimer = null;
   let audioContext = null;
   let introOscillator = null;
+  let uploadedSoundBufferPromise = null;
+  let uploadedSoundPreview = null;
 
   function toast(message) {
     const el = $('#toast');
@@ -22,17 +25,28 @@
   }
 
   async function api(path, options = {}) {
+    const requestUrl = new URL(`${API}${path}`, location.href);
     const init = {
       method: options.method || 'GET',
-      credentials: 'same-origin',
+      credentials: requestUrl.origin === location.origin ? 'same-origin' : 'include',
       headers: { ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...(options.headers || {}) },
       ...(options.body ? { body: JSON.stringify(options.body) } : {})
     };
     let response;
-    try { response = await fetch(`${API}${path}`, init); }
-    catch (_) { throw new Error('الخادم المحلي غير متصل. شغّل server.mjs أولًا.'); }
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || `خطأ اتصال ${response.status}`);
+    try { response = await fetch(requestUrl.href, init); }
+    catch (_) {
+      if (isGitHubPages) throw new Error('الموقع منشور على GitHub Pages، وهي استضافة ملفات ثابتة. يلزم نشر خادم API منفصل وربطه قبل إنشاء الحسابات أو تشغيل المناقشات.');
+      throw new Error('خادم ESKO غير متصل. تأكد من تشغيل backend/server.mjs أو ضبط ESKO_API_BASE.');
+    }
+    const contentType = response.headers.get('content-type') || '';
+    const payload = contentType.includes('application/json') ? await response.json().catch(() => ({})) : {};
+    if (!response.ok) {
+      if (isGitHubPages && (response.status === 404 || !contentType.includes('application/json'))) {
+        throw new Error('زر التسجيل يعمل، لكن مسار /api غير موجود على GitHub Pages. انشر خادم API منفصلًا ثم اضبط ESKO_API_BASE.');
+      }
+      throw new Error(payload.error || `خطأ اتصال ${response.status}`);
+    }
+    if (!contentType.includes('application/json')) throw new Error('استجابة الخادم غير صالحة؛ المتوقع JSON من خادم API.');
     return payload;
   }
 
@@ -108,12 +122,53 @@
       $('#introCount').textContent = Math.max(0, remaining);
       if (remaining <= 0) enterAfterIntro();
     }, 1000);
-    if (soundOn) playIntroTone();
+    if (soundOn) { if ($('#backgroundSound')?.value === 'uploaded') void playUploadedSoundSample(); else playIntroTone(); }
+  }
+
+  async function playUploadedSoundSample() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      audioContext ||= new AudioCtx();
+      if (audioContext.state === 'suspended') await audioContext.resume();
+      if (!uploadedSoundBufferPromise) {
+        const sourceUrl = new URL('assets/esko-interface-theme.mp3', document.baseURI).href;
+        uploadedSoundBufferPromise = fetch(sourceUrl, { cache: 'force-cache' })
+          .then(response => { if (!response.ok) throw new Error('تعذر تحميل مقطع الصوت'); return response.arrayBuffer(); })
+          .then(bytes => audioContext.decodeAudioData(bytes))
+          .catch(() => null);
+      }
+      const buffer = await uploadedSoundBufferPromise;
+      if (!buffer) return;
+      const source = audioContext.createBufferSource();
+      const gain = audioContext.createGain();
+      source.buffer = buffer;
+      gain.gain.value = 0.075;
+      source.connect(gain).connect(audioContext.destination);
+      source.start(0, 0, Math.min(0.28, buffer.duration));
+    } catch (_) { /* Audio is optional; never block navigation. */ }
+  }
+
+  function previewUploadedSound() {
+    try {
+      const audio = $('#eskoUiAudio');
+      if (!audio) return;
+      if (uploadedSoundPreview) { uploadedSoundPreview.pause(); uploadedSoundPreview.currentTime = 0; }
+      uploadedSoundPreview = audio.cloneNode(true);
+      uploadedSoundPreview.volume = 0.18;
+      uploadedSoundPreview.loop = false;
+      uploadedSoundPreview.play().catch(() => toast('المتصفح منع تشغيل الصوت؛ اضغط معاينة الصوت مرة أخرى.'));
+    } catch (_) { toast('تعذر تشغيل المقطع الصوتي على هذا المتصفح.'); }
+  }
+
+  function stopUploadedSoundPreview() {
+    if (uploadedSoundPreview) { uploadedSoundPreview.pause(); uploadedSoundPreview.currentTime = 0; uploadedSoundPreview = null; }
   }
 
   function playUiSound(eventType='open') {
     if (!$('#soundToggle')?.checked) return;
     const style=$('#backgroundSound')?.value || 'soft'; if(style==='off') return;
+    if (style === 'uploaded') { void playUploadedSoundSample(); return; }
     try {
       const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)return;
       audioContext ||= new AudioCtx();if(audioContext.state==='suspended')audioContext.resume();
@@ -199,6 +254,35 @@
     const platform = navigator.userAgentData?.platform || navigator.platform || 'غير مكشوفة';
     $('#cpuArch').textContent = `${String(platform).slice(0, 24)} · لا يكشف اسم المعالج`;
     $('#motionState').textContent = document.body.classList.contains('no-motion') ? 'مخفّضة' : 'مفعّلة';
+    runEngineDiagnostics();
+  }
+
+  async function runEngineDiagnostics() {
+    const output = $('#engineDiagnosticOutput');
+    if (!output) return;
+    output.textContent = 'جارٍ فحص إمكانيات المتصفح والتخزين...';
+    const storageReady = await store.ready().then(() => true).catch(() => false);
+    let storageText = storageReady ? 'IndexedDB جاهز' : 'IndexedDB غير متاح';
+    if (storageReady && navigator.storage?.estimate) {
+      try {
+        const estimate = await navigator.storage.estimate();
+        const used = Number.isFinite(estimate.usage) ? `${(estimate.usage / 1024 / 1024).toFixed(1)} MB مستخدم` : '';
+        storageText += used ? ` · ${used}` : '';
+      } catch (_) { /* Storage quota is optional. */ }
+    }
+    const connection = navigator.connection?.effectiveType || 'غير معلومة';
+    const reducedMotion = document.body.classList.contains('no-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nav = performance.getEntriesByType('navigation')[0];
+    const loadMs = nav ? Math.round(nav.loadEventEnd || nav.duration) : null;
+    const checks = [
+      ['واجهة الموقع', 'فعالة', 'التنقل والأحداث تعمل على المتصفح الحالي'],
+      ['معالج الملفات', window.ESKOImagePipeline ? 'متاح' : 'غير متاح', 'ضغط صور WebP مع حد مستهدف 300KB'],
+      ['معالج الحركة', reducedMotion ? 'حركة مخفّضة' : 'الحركة مفعّلة', 'احترام إعداد تقليل الحركة وتفضيل المستخدم'],
+      ['معالج البيانات', storageReady ? 'جاهز' : 'غير جاهز', storageText],
+      ['معالج الاتصال', navigator.onLine ? 'متصل' : 'غير متصل', `نوع الاتصال المعلن: ${connection}`],
+      ['زمن تحميل الصفحة', loadMs === null ? 'غير متاح' : `${loadMs} ms`, 'قياس تقريبي من واجهة Performance API']
+    ];
+    output.innerHTML = checks.map(([name, state, detail]) => `<div class="engine-result"><b>${escapeHTML(name)}</b><strong>${escapeHTML(state)}</strong><small>${escapeHTML(detail)}</small></div>`).join('');
   }
 
   function updateNetwork() {
@@ -212,7 +296,7 @@
     if (currentUser) {
       box.innerHTML = `<b>مسجل الدخول: ${escapeHTML(currentUser.displayName)}</b><span>@${escapeHTML(currentUser.username)}</span>`;
     } else {
-      box.innerHTML = '<b>غير مسجل الدخول</b><span>التسجيل يحتاج تشغيل الخادم والاتصال به.</span>';
+      box.innerHTML = '<b>غير مسجل الدخول</b><span>التسجيل يحتاج خادم API منشورًا ومتصلًا.</span>'; 
     }
   }
 
@@ -244,7 +328,11 @@
       $('#recoveryReveal').textContent = `رمز الاسترجاع لمرة واحدة: ${result.recoveryCode} — احتفظ به خارج الهاتف. لن يظهر مرة أخرى.`;
       event.currentTarget.reset();
       toast('تم إنشاء الحساب على الخادم المحلي.');
-    } catch (error) { toast(error.message); }
+    } catch (error) {
+      const hint = $('#accountServiceHint');
+      if (hint) hint.textContent = error.message;
+      toast(error.message);
+    }
   }
 
   async function onLogin(event) {
@@ -590,12 +678,13 @@
     $$('.theme-choice').forEach(button => button.addEventListener('click', () => saveSettings({ theme: button.dataset.themeChoice, wallpaper:button.dataset.themeChoice })));
     $('#themeQuick').addEventListener('click', async () => { const themes=['sea','nebula','grid','aurora','cyber']; const current=document.body.dataset.wallpaper; const next=themes[(themes.indexOf(current)+1)%themes.length]; await saveSettings({wallpaper:next,theme:next==='sea'?'nebula':next}); toast(`الخلفية: ${next}`); if($('#soundToggle').checked)playUiSound('open'); });
     $('#wallpaperChoice').addEventListener('change',event=>saveSettings({wallpaper:event.target.value,theme:event.target.value==='sea'?'nebula':event.target.value}));
-    $('#backgroundSound').addEventListener('change',event=>{saveSettings({backgroundSound:event.target.value});playUiSound('preview');});
-    $('#previewSound').addEventListener('click',()=>playUiSound('preview'));
+    $('#backgroundSound').addEventListener('change',event=>{ saveSettings({backgroundSound:event.target.value}); if(event.target.value==='uploaded') previewUploadedSound(); else { stopUploadedSoundPreview(); playUiSound('preview'); } });
+    $('#previewSound').addEventListener('click',()=>{ if ($('#backgroundSound').value === 'uploaded') previewUploadedSound(); else playUiSound('preview'); });
     $('#edgeSpeed').addEventListener('change', event => saveSettings({ edgeSpeed: event.target.value }));
     $('#motionToggle').addEventListener('change', event => saveSettings({ motion: event.target.checked }));
-    $('#soundToggle').addEventListener('change', event => { saveSettings({ sound: event.target.checked }); if(event.target.checked) playIntroTone(); });
+    $('#soundToggle').addEventListener('change', event => { saveSettings({ sound: event.target.checked }); if(event.target.checked) { if($('#backgroundSound').value==='uploaded') playUploadedSoundSample(); else playIntroTone(); } else stopUploadedSoundPreview(); });
     $('#setLocalLock').addEventListener('click', configureLocalLock);
+    $('#runEngineDiagnostics')?.addEventListener('click', runEngineDiagnostics);
     $('#unlockForm').addEventListener('submit', async event => { event.preventDefault(); try { if (await unlockLocal($('#unlockPassword').value)) { showApp(); toast('تم فتح الواجهة.'); } else toast('كلمة المرور غير صحيحة.'); } catch (error) { toast(error.message); } });
     $('#resetLocalLock').addEventListener('click', async () => { if (confirm('إزالة القفل المحلي من هذا المتصفح؟')) { await store.remove('settings','localLock'); showApp(); toast('تمت إزالة القفل المحلي.'); } });
     $('#termsAccepted').addEventListener('change', event => { $('#acceptTerms').disabled = !event.target.checked; });
