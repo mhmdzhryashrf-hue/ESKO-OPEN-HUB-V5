@@ -51,25 +51,27 @@
   }
 
   function showAppNow() {
-    $('#intro').classList.add('hidden');
-    $('#lockScreen').classList.add('hidden');
-    $('#termsScreen').classList.add('hidden');
-    $('#appShell').classList.remove('hidden');
+    $('#intro')?.classList.add('hidden');
+    $('#lockScreen')?.classList.add('hidden');
+    $('#termsScreen')?.classList.add('hidden');
+    $('#appShell')?.classList.remove('hidden');
   }
 
   async function showApp() {
-    $('#intro').classList.add('hidden');
-    $('#lockScreen').classList.add('hidden');
-    $('#appShell').classList.add('hidden');
+    $('#intro')?.classList.add('hidden');
+    $('#lockScreen')?.classList.add('hidden');
+    $('#appShell')?.classList.add('hidden');
     const accepted = await store.get('settings', 'termsAccepted').catch(() => false);
     if (accepted === true) showAppNow();
-    else $('#termsScreen').classList.remove('hidden');
+    else $('#termsScreen')?.classList.remove('hidden');
   }
 
   function showLock() {
-    $('#intro').classList.add('hidden');
-    $('#appShell').classList.add('hidden');
-    $('#lockScreen').classList.remove('hidden');
+    const lockScreen = $('#lockScreen');
+    if (!lockScreen || !$('#unlockPassword')) { void showApp(); return; }
+    $('#intro')?.classList.add('hidden');
+    $('#appShell')?.classList.add('hidden');
+    lockScreen.classList.remove('hidden');
     $('#unlockPassword').focus();
   }
 
@@ -106,7 +108,8 @@
 
   async function continueAfterAccessPin() {
     const lock = await store.get('settings', 'localLock').catch(() => null);
-    if (lock?.enabled) showLock(); else showApp();
+    if (lock?.enabled && $('#lockScreen') && $('#unlockForm') && $('#unlockPassword')) showLock();
+    else showApp();
   }
 
   async function enterAfterIntro() {
@@ -689,8 +692,8 @@
     $('#soundToggle').addEventListener('change', event => { saveSettings({ sound: event.target.checked }); if(event.target.checked) { if($('#backgroundSound').value==='uploaded') playUploadedSoundSample(); else playIntroTone(); } else stopUploadedSoundPreview(); });
     $('#setLocalLock').addEventListener('click', configureLocalLock);
     $('#runEngineDiagnostics')?.addEventListener('click', runEngineDiagnostics);
-    $('#unlockForm').addEventListener('submit', async event => { event.preventDefault(); try { if (await unlockLocal($('#unlockPassword').value)) { showApp(); toast('تم فتح الواجهة.'); } else toast('كلمة المرور غير صحيحة.'); } catch (error) { toast(error.message); } });
-    $('#resetLocalLock').addEventListener('click', async () => { if (confirm('إزالة القفل المحلي من هذا المتصفح؟')) { await store.remove('settings','localLock'); showApp(); toast('تمت إزالة القفل المحلي.'); } });
+    $('#unlockForm')?.addEventListener('submit', async event => { event.preventDefault(); try { if (await unlockLocal($('#unlockPassword').value)) { showApp(); toast('تم فتح الواجهة.'); } else toast('كلمة المرور غير صحيحة.'); } catch (error) { toast(error.message); } });
+    $('#resetLocalLock')?.addEventListener('click', async () => { if (confirm('إزالة القفل المحلي من هذا المتصفح؟')) { await store.remove('settings','localLock'); showApp(); toast('تمت إزالة القفل المحلي.'); } });
     $('#termsAccepted').addEventListener('change', event => { $('#acceptTerms').disabled = !event.target.checked; });
     $('#acceptTerms').addEventListener('click', async () => { if (!$('#termsAccepted').checked) return; await store.set('settings','termsAccepted',true); showAppNow(); toast('تم حفظ الموافقة على الشروط محليًا.'); });
     $('#skipIntro').addEventListener('click', enterAfterIntro);
