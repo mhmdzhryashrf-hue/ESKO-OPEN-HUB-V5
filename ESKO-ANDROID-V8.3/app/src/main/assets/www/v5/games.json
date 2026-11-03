@@ -1,0 +1,366 @@
+[
+  {
+    "id": "esko-survival-arena",
+    "name": "ESKO Survival Arena",
+    "category": "بقاء ومغامرة",
+    "engine": "survival",
+    "ready": true
+  },
+  {
+    "id": "esko-sky-dash",
+    "name": "ESKO Sky Dash",
+    "category": "أركيد",
+    "engine": "skydash",
+    "ready": true
+  },
+  {
+    "id": "2048",
+    "name": "2048",
+    "category": "ألغاز",
+    "engine": "2048",
+    "ready": true
+  },
+  {
+    "id": "sudoku",
+    "name": "Sudoku",
+    "category": "ألغاز",
+    "engine": "sudoku",
+    "ready": true
+  },
+  {
+    "id": "minesweeper",
+    "name": "Minesweeper",
+    "category": "ألغاز",
+    "engine": "minesweeper",
+    "ready": true
+  },
+  {
+    "id": "solitaire",
+    "name": "Solitaire",
+    "category": "أوراق",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "mahjong",
+    "name": "Mahjong Solitaire",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "nonogram",
+    "name": "Nonogram",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "block-puzzle",
+    "name": "Block Puzzle",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "bubble-shooter",
+    "name": "Bubble Shooter",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "word-search",
+    "name": "Word Search",
+    "category": "كلمات",
+    "engine": "wordsearch",
+    "ready": true
+  },
+  {
+    "id": "crossword",
+    "name": "Crossword",
+    "category": "كلمات",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "snake",
+    "name": "Snake",
+    "category": "أركيد",
+    "engine": "snake",
+    "ready": true
+  },
+  {
+    "id": "pacman",
+    "name": "Pac-Man",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "tetris",
+    "name": "Tetris",
+    "category": "أركيد",
+    "engine": "tetris",
+    "ready": true
+  },
+  {
+    "id": "doodle-jump",
+    "name": "Doodle Jump",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "flappy-bird",
+    "name": "Flappy Bird",
+    "category": "أركيد",
+    "engine": "flappy",
+    "ready": true
+  },
+  {
+    "id": "helix-jump",
+    "name": "Helix Jump",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "stack",
+    "name": "Stack",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "color-switch",
+    "name": "Color Switch",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "fruit-ninja",
+    "name": "Fruit Ninja",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "crossy-road",
+    "name": "Crossy Road",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "subway-surfers",
+    "name": "Subway Surfers",
+    "category": "مغامرات",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "temple-run-2",
+    "name": "Temple Run 2",
+    "category": "مغامرات",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "jetpack-joyride",
+    "name": "Jetpack Joyride",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "geometry-dash",
+    "name": "Geometry Dash",
+    "category": "مهارة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "angry-birds",
+    "name": "Angry Birds",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "little-alchemy-2",
+    "name": "Little Alchemy 2",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "cut-the-rope",
+    "name": "Cut the Rope",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "tiny-fishing",
+    "name": "Tiny Fishing",
+    "category": "أركيد",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "merge-fruit",
+    "name": "Merge Fruit",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "flow-free",
+    "name": "Flow Free",
+    "category": "ألغاز",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "8-ball-pool",
+    "name": "8 Ball Pool",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "basketball-stars",
+    "name": "Basketball Stars",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "basketball-legends",
+    "name": "Basketball Legends",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "soccer-skills",
+    "name": "Soccer Skills World Cup",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "penalty-shooters",
+    "name": "Penalty Shooters 2",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "football-legends",
+    "name": "Football Legends",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "mini-golf",
+    "name": "Mini Golf Club",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "bowling-stars",
+    "name": "Bowling Stars",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "tennis-open",
+    "name": "Tennis Open",
+    "category": "رياضة",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "drift-hunters",
+    "name": "Drift Hunters",
+    "category": "سباقات",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "moto-x3m",
+    "name": "Moto X3M",
+    "category": "سباقات",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "hill-climb",
+    "name": "Hill Climb Racing",
+    "category": "سباقات",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "agar-io",
+    "name": "Agar.io",
+    "category": "متعددة اللاعبين",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "slither-io",
+    "name": "Slither.io",
+    "category": "متعددة اللاعبين",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "paper-io-2",
+    "name": "Paper.io 2",
+    "category": "متعددة اللاعبين",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "chess",
+    "name": "Chess",
+    "category": "ألعاب لوحية",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "checkers",
+    "name": "Checkers",
+    "category": "ألعاب لوحية",
+    "engine": "",
+    "ready": false
+  },
+  {
+    "id": "tic-tac-toe",
+    "name": "Tic Tac Toe",
+    "category": "ألعاب لوحية",
+    "engine": "tictactoe",
+    "ready": true
+  },
+  {
+    "id": "reversi",
+    "name": "Reversi",
+    "category": "ألعاب لوحية",
+    "engine": "reversi",
+    "ready": true
+  },
+  {
+    "id": "memory-match",
+    "name": "Memory Match",
+    "category": "ألغاز",
+    "engine": "memory",
+    "ready": true
+  }
+]

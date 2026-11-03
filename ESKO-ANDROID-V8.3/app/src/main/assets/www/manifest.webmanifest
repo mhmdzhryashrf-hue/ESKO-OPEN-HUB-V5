@@ -1,0 +1,26 @@
+{
+  "name": "ESKO OPEN HUB V8.3 – TITAN ALL-IN-ONE",
+  "short_name": "ESKO V8.3",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090817",
+  "theme_color": "#090817",
+  "lang": "ar",
+  "dir": "rtl",
+  "scope": "./",
+  "id": "./",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

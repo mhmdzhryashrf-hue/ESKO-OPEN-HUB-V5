@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090817">
+  <meta name="description" content="ESKO OPEN HUB V8.3 - TITAN UNIVERSE">
+  <title>ESKO OPEN HUB | V8.3 TITAN UNIVERSE · LEVELING</title>
+  <meta name="application-version" content="8.2">
+  <link rel="stylesheet" href="v5/esko-v5.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="nebula" data-wallpaper="sea">
+  <canvas id="geometry" aria-hidden="true"></canvas>
+  <div class="edge edge-start" aria-hidden="true"></div>
+  <div class="edge edge-end" aria-hidden="true"></div>
+
+  <section id="intro" class="intro" aria-label="مقدمة ESKO V8.3">
+    <div class="intro-grid" aria-hidden="true"></div>
+    <div class="intro-mark">ESKO</div>
+    <div class="intro-sub">OPEN HUB <span>V8.3</span></div>
+    <div class="intro-line"></div>
+    <p>منظومتك تبدأ من هنا</p>
+    <a class="intro-support" data-random-support href="https://wa.me/963993825873" rel="noopener">محادثة فريق الدعم</a>
+    <button id="skipIntro" class="ghost-button">تخطي المقدمة</button>
+    <div class="intro-count" id="introCount">6</div>
+  </section>
+
+  <section id="termsScreen" class="terms-screen hidden">
+    <div class="terms-card panel">
+      <div class="brand-small">ESKO <span>V8.3</span></div>
+      <h1>شروط الاستخدام وإخلاء المسؤولية</h1>
+      <div class="terms-copy">
+        <p><b>الاستخدام القانوني:</b> استخدم الأدوات والمحادثات فقط بطريقة قانونية، ولا تفحص موقعًا إلا إذا كنت تملكه أو لديك تصريح صريح من صاحبه.</p>
+        <p><b>حدود الفحص:</b> قسم المؤمّن يراجع مؤشرات تهيئة HTTPS فقط، ولا يضمن اكتشاف كل الثغرات أو إثبات خلو الموقع منها.</p>
+        <p><b>الخصوصية:</b> الملاحظات والإعدادات والصورة الشخصية تُحفظ محليًا في المتصفح. إنشاء الحسابات والمناقشات يحتاج خادم API مستقلًا؛ GitHub Pages وحده لا يشغّل هذا الخادم.</p>
+        <p><b>المجتمع:</b> لا تنشر رقم هاتفك أو عنوانك أو كلمات المرور. ارفض الطلبات غير المريحة واستخدم الحظر والإبلاغ. الرسائل الخاصة تتطلب موافقة الطرف الآخر.</p>
+        <p><b>المسؤولية:</b> صاحب الحساب مسؤول عن استخدامه. لا توجد ضمانات تشغيل أو أمان مطلق، ويجب الاحتفاظ بنسخة آمنة من رمز الاسترجاع.</p>
+      </div>
+      <label class="terms-accept"><input id="termsAccepted" type="checkbox"> قرأت الشروط وأوافق على الالتزام بها.</label>
+      <button id="acceptTerms" class="primary-button" disabled>موافقة ودخول</button>
+      <a class="lock-support" data-random-support href="https://wa.me/963993825873" rel="noopener">محادثة فريق الدعم</a>
+    </div>
+  </section>
+
+  <section id="networkGate" class="network-gate hidden" role="alertdialog" aria-modal="true" aria-labelledby="networkTitle">
+    <div class="network-card panel">
+      <div class="network-symbol">⌁</div><h1 id="networkTitle">تحقق من اتصال الإنترنت</h1>
+      <p id="networkMessage">يلزم اتصال مستقر لا تقل سرعته عن 2KB/s لفتح المنظومة.</p>
+      <div class="network-meter"><span id="networkMeterFill"></span></div>
+      <small id="networkSpeed">لم يتم قياس السرعة بعد.</small>
+      <button id="retryNetwork" class="primary-button" type="button">إعادة اختبار الاتصال</button>
+    </div>
+  </section>
+
+  <div id="appShell" class="app-shell hidden">
+    <header class="topbar panel">
+      <button id="menuToggle" class="icon-button" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+      <div class="top-brand"><strong>ESKO</strong><small>OPEN HUB · V8.3</small></div>
+      <div class="top-actions">
+        <span id="netState" class="network-pill">محلي</span>
+        <button id="themeQuick" class="icon-button sparkle" aria-label="تغيير الخلفية">✦</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <div id="menuShade" class="menu-shade"></div>
+      <aside id="sideMenu" class="side-menu panel" aria-label="القائمة الجانبية">
+        <div class="side-head"><span class="side-emblem">♕</span><div><b>ESKO JOKER</b><small>المنظومة البرمجية</small></div></div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-page="home"><span>⌂</span> الرئيسية</button>
+          <button class="nav-item" data-page="galaxy"><span>🌌</span> Galaxy Map</button>
+          <button class="nav-item" data-page="infinity-core"><span>♾</span> Infinity Core</button>
+          <button class="nav-item" data-page="processor-universe"><span>⚡</span> معالجات Galaxy</button>
+          <button class="nav-item" data-page="system-universe"><span>🪐</span> عوالم ESKO</button>
+          <button class="nav-item" data-page="omniverse"><span>🌐</span> ESKO Commander / OS</button>
+          <button class="nav-item" data-page="titan-core"><span>⚛</span> TITAN CORE</button>
+          <button class="nav-item" data-page="ai-factory"><span>🧠</span> AI FACTORY</button>
+          <button class="nav-item" data-page="reality-builder"><span>🪄</span> REALITY BUILDER</button>
+          <button class="nav-item" data-page="app-factory"><span>📦</span> APP FACTORY</button>
+          <button class="nav-item" data-page="code-compiler"><span>🧪</span> CODE COMPILER</button>
+          <button class="nav-item" data-page="api-market"><span>🔌</span> API MARKET</button>
+          <button class="nav-item" data-page="ai-training"><span>🎓</span> AI TRAINING</button>
+          <button class="nav-item" data-page="project-manager"><span>📋</span> PROJECT MANAGER</button>
+          <button class="nav-item" data-page="team-workspace"><span>👥</span> TEAM WORKSPACE</button>
+          <button class="nav-item" data-page="design-engine"><span>🎨</span> DESIGN ENGINE</button>
+          <button class="nav-item" data-page="cloud-backup"><span>☁</span> CLOUD BACKUP</button>
+          <button class="nav-item" data-page="titan-processors"><span>⚡</span> TITAN PROCESSORS</button>
+          <button class="nav-item" data-page="leveling"><span>🏅</span> Leveling & Referral</button>
+          <button class="nav-item" data-page="feature-lab"><span>🧬</span> Feature Lab · 600 ميزة</button>
+          <button class="nav-item" data-page="main-processor"><span>🚀</span> TITAN Main Processor</button>
+          <button class="nav-item" data-page="titan-hub"><span>👑</span> TITAN All-in-One Hub</button>
+          <button class="nav-item" data-page="ai-legion"><span>🧠</span> AI Legion</button>
+          <button class="nav-item" data-page="infinity-builder"><span>🧱</span> Infinity Builder</button>
+          <button class="nav-item" data-page="time-machine"><span>⏳</span> Time Machine</button>
+          <button class="nav-item" data-page="cloud-network"><span>☁️</span> Cloud Network</button>
+          <button class="nav-item" data-page="automation-matrix"><span>🔗</span> Automation Matrix</button>
+          <button class="nav-item" data-page="creator-studio"><span>🎨</span> Creator Studio</button>
+          <button class="nav-item" data-page="knowledge-galaxy"><span>📚</span> Knowledge Galaxy</button>
+          <button class="nav-item" data-page="voice-control"><span>🎙️</span> Voice Control</button>
+          <button class="nav-item" data-page="plugin-factory"><span>🧩</span> Plugin Factory</button>
+          <button class="nav-item" data-page="project-dna"><span>🧬</span> Project DNA</button>
+          <button class="nav-item" data-page="mission-center"><span>🏅</span> Mission Center</button>
+          <button class="nav-item" data-page="settings"><span>⚙</span> الإعدادات</button>
+          <button class="nav-item" data-page="about"><span>▣</span> الإصدار والوصف</button>
+          <button class="nav-item" data-page="processor"><span>◈</span> نوعية المعالج</button>
+          <button class="nav-item" data-page="education"><span>🎓</span> قسم التعليم والبرمجة</button>
+          <button class="nav-item" data-page="ai-studio"><span>🧠</span> ESKO AI Studio</button>
+          <button class="nav-item" data-page="code-lab"><span>⌨</span> مختبر البرمجة</button>
+          <button class="nav-item" data-page="learning-paths"><span>🧭</span> مسارات التعلم</button>
+          <button class="nav-item" data-page="security-ops"><span>🛡</span> مراقبة المطور</button>
+          <button class="nav-item" data-page="cloud"><span>☁</span> ESKO Cloud</button>
+          <button class="nav-item" data-page="addon-market"><span>🧩</span> متجر الإضافات</button>
+          <button class="nav-item" data-page="challenges"><span>🏆</span> التحديات والمسابقات</button>
+          <button class="nav-item" data-page="account"><span>♙</span> الحساب</button>
+          <button class="nav-item" data-page="support"><span>✉</span> الدعم</button>
+          <button class="nav-item" data-page="discussions"><span>◎</span> المناقشات</button>
+          <button class="nav-item" data-page="notes"><span>✎</span> ملاحظاتك</button>
+          <button class="nav-item" data-page="memory"><span>▤</span> وحدة الذاكرة</button>
+          <button class="nav-item" data-page="termux"><span class="termux-mini">▣</span> قسم تريمكس</button>
+          <button class="nav-item" data-page="scanner"><span>◇</span> المؤمن · فحص آمن</button>
+          <button class="nav-item" data-page="security"><span>🛡</span> مركز الحماية</button>
+        </nav>
+        <div class="side-footer"><span class="status-dot"></span> واجهة V8.3 TITAN UNIVERSE · LEVELING</div>
+      </aside>
+
+      <main id="mainContent" class="main-content">
+        <section class="page active" id="page-home">
+          <div class="hero panel">
+            <div class="hero-copy"><span class="eyebrow">WELCOME TO ESKO TITAN UNIVERSE</span><h1>♕ ESKO <em>JOKER</em></h1><p>عالم رقمي مستقبلي يجمع الذكاء الاصطناعي، البرمجة، الألعاب، الإبداع وعالم TITAN المتكامل.</p><div class="hero-chips"><span>V8.3 TITAN UNIVERSE · LEVELING</span><span>QUANTUM UI</span><span>ADAPTIVE PERFORMANCE</span></div></div>
+            <div class="hero-orbit" aria-hidden="true"><i></i><b></b><span></span><div>ESKO</div></div>
+          </div>
+          <section class="titan-launchpad panel">
+            <div class="titan-launch-copy"><span class="eyebrow">V8.3 · TITAN UNIVERSE</span><h2>من الفكرة إلى مشروع قابل للتصدير</h2><p>نواة تشغيل، مصنع مشاريع، منشئ بصري، مراجعة كود، وإدارة عمل في مساحة واحدة.</p></div>
+            <div class="titan-launch-actions"><button class="primary-button" data-go="titan-core">فتح TITAN CORE</button><button class="small-button" data-go="ai-factory">ابدأ مشروعًا جديدًا</button><button class="small-button" data-go="reality-builder">صمم صفحة الآن</button></div><div class="titan-mini-links"><button class="small-button" data-go="app-factory">App Factory</button><button class="small-button" data-go="code-compiler">Code Review</button><button class="small-button" data-go="project-manager">Project Manager</button><button class="small-button" data-go="cloud-backup">Cloud Backup</button></div>
+          </section>
+          <div class="section-heading"><div><span class="eyebrow">CONTROL CENTER</span><h2>لوحة المنظومة</h2></div><span class="live-tag"><i></i> جاهز محليًا</span></div>
+          <div class="quick-grid">
+            <button class="quick-card panel" data-go="account"><span>♙</span><b>الحساب</b><small>إنشاء واسترجاع</small></button>
+            <button class="quick-card panel" data-go="discussions"><span>◎</span><b>المناقشات</b><small>عام ومجموعات ورسائل</small></button>
+            <button class="quick-card panel" data-go="notes"><span>✎</span><b>ملاحظاتك</b><small>حفظ على الجهاز</small></button>
+            <button class="quick-card panel" data-go="scanner"><span>◇</span><b>المؤمّن</b><small>فحص إعدادات الموقع</small></button>
+            <button class="quick-card panel" data-go="security"><span>🛡</span><b>مركز الحماية</b><small>مراقبة وتشفير وإشعارات</small></button>
+            <button class="quick-card panel" data-go="education"><span>🎓</span><b>أكاديمية البرمجة</b><small>20 مصدرًا · مدرس JavaScript · تحليل الكود</small></button>
+            <button class="quick-card panel" data-go="ai-studio"><span>🧠</span><b>AI Studio</b><small>مدير تعلم وتحليل ومساعدة</small></button>
+            <button class="quick-card panel galaxy-quick" data-go="galaxy"><span>🌌</span><b>Galaxy Map</b><small>خريطة عالم ESKO</small></button>
+            <button class="quick-card panel galaxy-quick" data-go="infinity-core"><span>♾</span><b>Infinity Core</b><small>مركز تنسيق المعالجات</small></button>
+            <button class="quick-card panel galaxy-quick" data-go="processor-universe"><span>⚡</span><b>Galaxy Processors</b><small>12 محركًا برمجيًا</small></button>
+            <button class="quick-card panel galaxy-quick" data-go="system-universe"><span>🪐</span><b>ESKO Omniverse</b><small>8 عوالم تفاعلية</small></button>
+            <button class="quick-card panel" data-go="code-lab"><span>⌨</span><b>مختبر البرمجة</b><small>كتابة وتشغيل JavaScript بأمان نسبي</small></button>
+            <button class="quick-card panel" data-go="learning-paths"><span>🧭</span><b>مسارات التعلم</b><small>مسارات ومهارات وتقدم</small></button>
+            <button class="quick-card panel" data-go="security-ops"><span>🛡</span><b>مراقبة المطور</b><small>مؤشرات وأحداث محلية</small></button>
+            <button class="quick-card panel" data-go="cloud"><span>☁</span><b>ESKO Cloud</b><small>إدارة المشاريع والنسخ المحلية</small></button>
+            <button class="quick-card panel" data-go="addon-market"><span>🧩</span><b>متجر الإضافات</b><small>قوالب ووحدات آمنة</small></button>
+            <button class="quick-card panel" data-go="challenges"><span>🏆</span><b>التحديات</b><small>نقاط وشارات وتدريب</small></button>
+          </div>
+            <button class="quick-card panel omniverse-quick" data-go="omniverse"><span>🌐</span><b>ESKO Commander</b><small>سطح مكتب ومركز تحكم</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="ai-legion"><span>🧠</span><b>AI Legion</b><small>فريق مساعدي مهام</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="infinity-builder"><span>🧱</span><b>Infinity Builder</b><small>إنشاء صفحة وتصديرها</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="time-machine"><span>⏳</span><b>Time Machine</b><small>نسخ واسترجاع المشاريع</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="cloud-network"><span>☁️</span><b>Cloud Network</b><small>نسخ محلي واستيراد/تصدير</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="automation-matrix"><span>🔗</span><b>Automation Matrix</b><small>ربط إجراءات محلية</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="creator-studio"><span>🎨</span><b>Creator Studio</b><small>تصميم ثيمات شخصية</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="knowledge-galaxy"><span>📚</span><b>Knowledge Galaxy</b><small>بحث في أقسام الموقع</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="voice-control"><span>🎙️</span><b>Voice Control</b><small>أوامر صوتية اختيارية</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="plugin-factory"><span>🧩</span><b>Plugin Factory</b><small>إنشاء وصف إضافة آمنة</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="project-dna"><span>🧬</span><b>Project DNA</b><small>ملف بيانات المشروع</small></button>
+            <button class="quick-card panel omniverse-quick" data-go="mission-center"><span>🏅</span><b>Mission Center</b><small>مهام يومية وتقدم محلي</small></button>
+          <div class="panel notice-panel"><span class="notice-icon">!</span><div><b>تنبيه إصدار تجريبي</b><p>الخدمات المحلية تعمل على هذا الجهاز. الحسابات والمحادثات لا تصبح متاحة للناس على الإنترنت إلا بعد نشر خادم آمن وربطه بالموقع.</p></div></div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="page-title"><span class="eyebrow">PERSONALIZATION</span><h1>الإعدادات</h1><p>اختار شكل الواجهة وحركة الإضاءة والقفل المحلي.</p></div>
+          <div class="panel content-panel">
+            <h3>الخلفيات المتحركة</h3><div class="theme-grid">
+              <button class="theme-choice selected" data-theme-choice="nebula"><i class="theme-preview nebula-preview"></i><b>سديم</b></button>
+              <button class="theme-choice" data-theme-choice="grid"><i class="theme-preview grid-preview"></i><b>شبكة هندسية</b></button>
+              <button class="theme-choice" data-theme-choice="aurora"><i class="theme-preview aurora-preview"></i><b>شفق</b></button>
+              <button class="theme-choice" data-theme-choice="cyber"><i class="theme-preview cyber-preview"></i><b>سايبر</b></button>
+            </div>
+            <div class="setting-row"><div><b>الخلفية الرئيسية</b><small>المشهد البحري المتحرك أو الثيمات الهندسية</small></div><select id="wallpaperChoice"><option value="sea">البحر والنجوم</option><option value="nebula">السديم</option><option value="aurora">الشفق</option><option value="grid">الشبكة</option><option value="cyber">سايبر</option></select></div>
+            <div class="setting-row"><div><b>سرعة خطوط جوانب الشاشة</b><small>اضبط السرعة حسب أداء جهازك</small></div><select id="edgeSpeed"><option value="slow">بطيئة</option><option value="medium">متوسطة</option><option value="fast">سريعة</option></select></div>
+            <div class="setting-row"><div><b>حركة الأشكال الهندسية</b><small>تقليل الحركة يحافظ على البطارية</small></div><label class="switch"><input id="motionToggle" type="checkbox" checked><span></span></label></div>
+            <div class="setting-row"><div><b>تفعيل أصوات الواجهة</b><small>مغلقة افتراضيًا؛ يلزم تفاعل المستخدم للسماح بالتشغيل</small></div><label class="switch"><input id="soundToggle" type="checkbox"><span></span></label></div>
+            <div class="setting-row"><div><b>نوع صوت الخلفية والفتح</b><small>اختر نغمة وجرّبها يدويًا</small></div><select id="backgroundSound"><option value="soft">هادئ</option><option value="ocean">موج بحري</option><option value="space">فضائي</option><option value="uploaded">المقطع الصوتي المرفوع</option><option value="off">بدون صوت</option></select></div>
+            <button id="previewSound" type="button" class="small-button">معاينة الصوت</button>
+            <div class="setting-row"><div><b>قفل الواجهة بكلمة مرور</b><small>قفل محلي تجريبي، ليس تشفيرًا للملفات</small></div><button id="setLocalLock" class="small-button">إعداد القفل</button></div>
+            <div class="setting-row"><div><b>التعرّف على الجهاز الموثوق</b><small>يتطلب دمج Android Keystore في التطبيق الأصلي؛ غير مفعل في الإضافة المستقلة.</small></div><span class="tag">بانتظار الدمج</span></div>
+            <p class="helper-text">الحماية القوية للتطبيق تحتاج دمج Android Keystore داخل كود Java/Kotlin الأصلي؛ ملف الإضافة وحده لا يقدرش يضمن ده.</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-about">
+          <div class="page-title"><span class="eyebrow">RELEASE NOTES</span><h1>الإصدار والوصف</h1></div>
+          <div class="panel content-panel release-card"><div class="release-number">8.2</div><div><h2>ESKO OPEN HUB</h2><p>TITAN UNIVERSE: نواة مركزية، AI Factory لتخطيط المشاريع محليًا، Reality Builder، App Factory، مراجع أكواد ثابت، API Market، مختبر تعلم AI، إدارة مشاريع وفِرق محلية، محرك تصميم، ونسخ احتياطي مشفّر.</p><span class="release-state">V8.3 · TITAN UNIVERSE</span></div></div>
+          <div class="panel content-panel"><h3>المكونات الموجودة في الحزمة</h3><ul class="feature-list"><li>خلفية Joker من الصورة المرفوعة، بحركة بطيئة وطبقة عينين متحركة بشكل خفيف.</li><li>إزالة رمز الدخول الثابت الذي كان ظاهرًا داخل JavaScript؛ القفل المحلي يبقى قفل واجهة فقط.</li><li>ضغط الصور الشخصية إلى WebP بحجم أقصى مستهدف 300KB.</li><li>1600 بطاقة كتالوج أدوات موزعة على 10 أقسام؛ ليست كلها محركات تنفيذية.</li><li>160 قالبًا أساسيًا، بالإضافة إلى 500 قالب بوت في متجر الهياكل، مع أيقونات وفق الوظيفة.</li><li>52 لعبة في قسم الألعاب الأساسي، مع 100 لعبة في كتالوج المتجر؛ 12 منها فقط مرتبطة بمحركات محلية جاهزة.</li><li>90 دالة مساعدة للأداء موزعة على تدفق المهام وDOM والذاكرة والصور والحركة والشبكة والقياس وإمكانية الوصول.</li><li>300 منظر هندسي للموقع مع المعاينة والإضافة والتشغيل والدعم.</li><li>أكاديمية V5.7 التعليمية: 20 مصدرًا، 21 لغة وتقنية، 12 درس JavaScript. أضاف V8.3 استوديو AI، مختبر كود معزول، 4 مسارات تعلم، مراقبة المطور، مساحة مشاريع محلية، متجر إضافات وصفي، و12 تحديًا.</li><li>بحث محلي داخل كتالوج المنظومة، مع بحث Google اختياري.</li><li>V8.3 TITAN UNIVERSE · LEVELING: 12 وحدة نظام جديدة، 15 محركًا برمجيًا، مولد هياكل مشاريع، منشئ صفحات بصري معزول، مصنع قوالب تطبيقات، مراجعة كود ثابتة، كتالوج APIs، مختبر تصنيف تعليمي، إدارة مشاريع وفريق، تصميم ألوان، ونسخ V8 مشفّر.</li></ul></div>
+        </section>
+
+        <section class="page" id="page-processor">
+          <div class="page-title"><span class="eyebrow">DEVICE & PERFORMANCE</span><h1>نوعية المعالج</h1><p>بيانات المتصفح والجهاز التي يسمح النظام بقراءتها.</p></div>
+          <div class="stats-grid"><div class="panel stat-card"><small>أنوية منطقية متاحة</small><strong id="cpuCores">—</strong></div><div class="panel stat-card"><small>الذاكرة المعلنة</small><strong id="deviceMemory">غير متاحة</strong></div><div class="panel stat-card"><small>منصة النظام التي يكشفها المتصفح</small><strong id="cpuArch">غير مكشوفة</strong></div><div class="panel stat-card"><small>حالة الحركة</small><strong id="motionState">مفعّلة</strong></div></div>
+          <div class="panel content-panel">
+            <h3>محركات الموقع المساعدة</h3>
+            <div class="engine-grid">
+              <div class="engine-card"><b>محرك الواجهة</b><small>إدارة التفاعل والتنقل وتحديث العناصر.</small></div>
+              <div class="engine-card"><b>محرك الملفات</b><small>فحص الصور وضغط WebP قبل التخزين.</small></div>
+              <div class="engine-card"><b>محرك الحركة</b><small>دعم اللمس واحترام إعداد تقليل الحركة.</small></div>
+              <div class="engine-card"><b>محرك البيانات</b><small>استخدام IndexedDB وحساب مساحة التخزين عند السماح.</small></div>
+              <div class="engine-card"><b>محرك الاتصال</b><small>عرض حالة الشبكة ونوعها المعلن دون ادعاء تسريع الإنترنت.</small></div>
+            </div>
+            <button id="runEngineDiagnostics" type="button" class="small-button">فحص المحركات الآن</button>
+            <div id="engineDiagnosticOutput" class="engine-results" aria-live="polite">اضغط فحص المحركات لعرض حالة إمكانيات جهازك.</div>
+            <p class="helper-text">هذه طبقة تحسين وفحص للمتصفح؛ لا تنشئ CPU جديدًا ولا تتجاوز حدود الجهاز أو الشبكة.</p>
+            <div class="panel content-panel performance90-panel"><h3>90 معالجًا مساعدًا موزعًا على الموقع</h3><p class="helper-text">هذه دوال برمجية خفيفة تعمل داخل المتصفح، وليست 90 نواة CPU فعلية.</p><div id="performance90Grid" class="performance90-grid" aria-live="polite">جارٍ تحميل قائمة المعالجات…</div><p id="performance90Summary" class="helper-text"></p></div>
+          </div>
+          <div class="panel content-panel"><h3>محركات المساعدة</h3><div class="assistant-row"><div><b>المحرك الأول · مساعد ESKO</b><small>قواعد محلية وإرشادات ثابتة، بدون اتصال خارجي.</small></div><span class="tag">محلي</span></div><div class="assistant-row"><div><b>المحرك الثاني · مساعد البرمجة</b><small>قواعد مساعدة أولية؛ ليس نموذج ذكاء اصطناعي توليديًا بعد.</small></div><span class="tag">تجريبي</span></div><label class="assistant-input-label">جرّب أحد المحركين<select id="assistantEngine"><option value="esko">مساعد ESKO</option><option value="code">مساعد البرمجة</option></select></label><textarea id="assistantQuestion" rows="3" maxlength="1200" placeholder="اكتب سؤالك..." ></textarea><button id="askAssistant" class="small-button">تشغيل المساعد المحلي</button><div id="assistantAnswer" class="assistant-answer">الردود محلية وقواعدية وليست ناتجة عن نموذج AI توليدي.</div><p class="helper-text">لا يوجد ادعاء بزيادة سرعة CPU أو تشغيل نموذجين AI جاهزين على الهاتف. التحسين الفعلي هنا يعتمد على تقليل إعادة الرسم والحركة غير الضرورية.</p></div>
+        </section>
+
+        <section class="page" id="page-education">
+          <div class="page-title"><span class="eyebrow">ESKO CODE ACADEMY</span><h1>🎓 أكاديمية التعليم والبرمجة</h1><p>تعلم خطوة بخطوة، وابحث في 20 مصدرًا، واطلب شرحًا أو تحليلًا للكود. الواجهة التعليمية لا تشغّل كودك ولا ترسل ملفاتك تلقائيًا.</p></div>
+          <div class="stats-grid education-stats">
+            <div class="panel stat-card"><small>مصادر البحث والمساعدة</small><strong>20</strong></div>
+            <div class="panel stat-card"><small>لغات وتقنيات مدعومة</small><strong>21</strong></div>
+            <div class="panel stat-card"><small>دروس JavaScript الأساسية</small><strong>12</strong></div>
+            <div class="panel stat-card"><small>إنجازك في الدروس</small><strong id="eduProgressCount">0 / 12</strong></div>
+          </div>
+          <div class="panel content-panel">
+            <div class="education-heading"><div><h3>مكتبة البحث ومساعدات البرمجة</h3><p class="helper-text">اختر منصة AI لطلب شرح أو مراجعة، أو افتح مرجعًا موثوقًا. بعض المنصات تتطلب حسابًا أو خطة خاصة بها.</p></div><span class="tag">20 مصدرًا</span></div>
+            <div class="education-filters">
+              <input id="eduResourceSearch" type="search" placeholder="ابحث عن مصدر: ChatGPT أو JavaScript أو Python…" aria-label="ابحث في مصادر التعليم">
+              <select id="eduResourceType" aria-label="نوع المصدر"><option value="all">كل المصادر</option><option value="ai">مساعدات الذكاء الاصطناعي</option><option value="search">محركات البحث البرمجي</option><option value="learn">التعليم والتوثيق</option></select>
+            </div>
+            <div id="eduResourceGrid" class="education-resource-grid"></div>
+            <p id="eduResourceStatus" class="helper-text" aria-live="polite">20 مصدرًا جاهزًا للفتح. المنصات الخارجية مستقلة عن ESKO.</p>
+          </div>
+          <div class="panel content-panel">
+            <div class="education-heading"><div><h3>مسار تعلم اللغات</h3><p class="helper-text">اختر لغة لعرض وصف البداية ومصدر رسمي أو تعليمي مناسب.</p></div></div>
+            <div class="education-language-row"><label for="eduLanguage">لغة البرمجة أو التقنية</label><select id="eduLanguage"></select></div>
+            <div id="eduLanguageInfo" class="education-language-info" aria-live="polite"></div>
+          </div>
+          <div class="panel content-panel">
+            <div class="education-heading"><div><h3>مدرس JavaScript التفاعلي</h3><p class="helper-text">12 درسًا من الأساسيات إلى الدوال وDOM والبرمجة غير المتزامنة. احفظ التقدم محليًا على هذا الجهاز.</p></div><span class="tag">مبتدئ ← متوسط</span></div>
+            <div class="education-progress"><span id="eduProgressBar"></span></div>
+            <div class="education-lesson-layout">
+              <aside id="eduLessonList" class="education-lesson-list" aria-label="قائمة دروس JavaScript"></aside>
+              <article id="eduLessonContent" class="education-lesson-content" aria-live="polite"></article>
+            </div>
+            <div class="form-actions education-actions"><button id="eduPrevLesson" class="small-button" type="button">الدرس السابق</button><button id="eduCompleteLesson" class="primary-button" type="button">علّمت الدرس كمكتمل</button><button id="eduNextLesson" class="small-button" type="button">الدرس التالي</button></div>
+            <p id="eduLessonStatus" class="helper-text" aria-live="polite">تقدمك محفوظ على هذا المتصفح فقط.</p>
+          </div>
+          <div class="education-tools-grid">
+            <div class="panel content-panel">
+              <h3>مساعد الشرح التعليمي</h3>
+              <p class="helper-text">اسأل عن مفهوم برمجي أو اطلب شرح مثال. يعمل الرد المحلي بقواعد تعليمية، ويمكن ربط نموذج AI حقيقي لاحقًا من الخادم دون وضع مفاتيح API في المتصفح.</p>
+              <label class="education-field-label" for="eduTutorQuestion">سؤالك</label>
+              <textarea id="eduTutorQuestion" rows="4" maxlength="2500" placeholder="اشرح لي الفرق بين let و const في JavaScript مع مثال بسيط…"></textarea>
+              <div class="form-actions"><button id="eduAskTutor" class="primary-button" type="button">اشرح لي</button><button id="eduCopyTutorPrompt" class="small-button" type="button">نسخ صيغة سؤال للـ AI</button></div>
+              <div id="eduTutorAnswer" class="education-answer" aria-live="polite">اكتب سؤالك للبدء. اختر اللغة المناسبة من مسار تعلم اللغات.</div>
+            </div>
+            <div class="panel content-panel">
+              <h3>محلل الكود</h3>
+              <p class="helper-text">تحليل ساكن للأنماط الشائعة والتنبيهات التعليمية فقط؛ لا ينفذ الكود، ولا يثبت خلوه من الأخطاء أو الثغرات.</p>
+              <label class="education-field-label" for="eduAnalyzerLanguage">لغة الكود</label>
+              <select id="eduAnalyzerLanguage"><option value="javascript">JavaScript</option><option value="typescript">TypeScript</option><option value="python">Python</option><option value="html">HTML</option><option value="css">CSS</option><option value="sql">SQL</option><option value="java">Java</option><option value="cpp">C / C++</option><option value="csharp">C#</option><option value="go">Go</option><option value="php">PHP</option><option value="rust">Rust</option></select>
+              <textarea id="eduCodeInput" class="education-code-input" rows="8" maxlength="30000" spellcheck="false" placeholder="الصق الكود هنا للتحليل التعليمي…"></textarea>
+              <div class="form-actions"><button id="eduAnalyzeCode" class="primary-button" type="button">حلّل الكود</button><button id="eduClearCode" class="small-button" type="button">مسح</button></div>
+              <div id="eduAnalysisOutput" class="education-answer" aria-live="polite">لم يتم تحليل أي كود بعد.</div>
+            </div>
+          </div>
+          <div class="panel notice-panel education-notice"><span class="notice-icon">i</span><div><b>توضيح مهم عن الذكاء الاصطناعي</b><p>المصادر العشر الأولى تفتح خدمات AI خارجية وليست 10 نماذج تعمل داخل الموقع. مدرس ESKO الحالي محلي وقواعدي، ومحلل الكود يعتمد قواعد ساكنة. للحصول على تحليل توليدي متقدم يلزم إعداد endpoint آمن على الخادم، مع حفظ مفاتيح المزوّد في الخادم فقط.</p></div></div>
+        </section>
+
+
+        <section class="page dev-page" id="page-ai-studio">
+          <div class="page-title"><span class="eyebrow">ESKO AI STUDIO</span><h1>🧠 استوديو الذكاء الاصطناعي</h1><p>مساعد موحد لشرح البرمجة ومراجعة الكود وتخطيط المشاريع. الوضع المحلي يقدم إرشادات تعليمية، أما النموذج التوليدي فيحتاج خادمًا آمنًا.</p></div>
+          <div class="dev-stats-grid"><div class="panel stat-card"><small>أوضاع المساعدة</small><strong>4</strong></div><div class="panel stat-card"><small>لغات متاحة</small><strong>21</strong></div><div class="panel stat-card"><small>حالة النموذج</small><strong id="studioModelState">محلي</strong></div></div>
+          <div class="panel content-panel">
+            <div class="education-heading"><div><h3>اسأل ESKO</h3><p class="helper-text">اختر نوع المهمة، واكتب سؤالك أو الكود. لا تشارك مفاتيح API أو بيانات خاصة.</p></div><span class="tag">AI Workspace</span></div>
+            <div class="dev-form-grid"><label>نوع المساعدة<select id="studioMode"><option value="explain">شرح مفهوم</option><option value="review">مراجعة كود</option><option value="debug">تفسير خطأ</option><option value="plan">تخطيط مشروع</option></select></label><label>اللغة<select id="studioLanguage"></select></label></div>
+            <label class="education-field-label" for="studioQuestion">السؤال أو الكود</label>
+            <textarea id="studioQuestion" class="education-code-input" rows="8" maxlength="30000" placeholder="مثال: اشرح لي الفرق بين let و const مع مثال عملي..."></textarea>
+            <div class="form-actions"><button id="studioAsk" class="primary-button" type="button">ابدأ المساعدة</button><button id="studioCopyPrompt" class="small-button" type="button">نسخ صيغة السؤال</button><label class="dev-check"><input id="studioServerConsent" type="checkbox"> أسمح بإرسال النص إلى خادم ESKO الموثوق إذا كان متصلًا</label></div>
+            <div id="studioAnswer" class="education-answer" aria-live="polite">اكتب سؤالك للبدء. الاستجابة المحلية قواعد تعليمية وليست نموذجًا توليديًا.</div>
+          </div>
+          <div class="panel notice-panel"><span class="notice-icon">i</span><div><b>ربط نموذج AI حقيقي</b><p>يمكن للخادم توفير POST /api/ai/assist. يجب أن يحتفظ الخادم بمفاتيح المزود، ويطبق تحديد المعدل والتحقق من الجلسة وسياسة الخصوصية. لا توجد مفاتيح أو بيانات اعتماد داخل ملفات الواجهة.</p></div></div>
+        </section>
+
+        <section class="page dev-page" id="page-code-lab">
+          <div class="page-title"><span class="eyebrow">SANDBOXED CODE LAB</span><h1>⌨ مختبر البرمجة</h1><p>اكتب HTML وCSS وJavaScript وشاهد المعاينة داخل إطار معزول. التنفيذ محلي، ولا يتم إرسال الكود إلى خادم.</p></div>
+          <div class="panel content-panel">
+            <div class="education-heading"><div><h3>محرر HTML / CSS / JavaScript</h3><p class="helper-text">المختبر يقيّد الشبكة والوصول للصفحة الأساسية، ويعيد ضبط الإطار بعد مهلة قصيرة. لا تشغّل كودًا مجهول المصدر.</p></div><span class="tag">Local Sandbox</span></div>
+            <div class="dev-code-grid">
+              <label>HTML<textarea id="labHtml" class="dev-editor" rows="7" maxlength="20000" spellcheck="false"><h2>مرحبًا بك في ESKO</h2><p id="message">ابدأ بتعديل المثال.</p><button id="helloButton">اضغط هنا</button></textarea></label>
+              <label>CSS<textarea id="labCss" class="dev-editor" rows="7" maxlength="12000" spellcheck="false">body { font-family: sans-serif; padding: 20px; background: #101326; color: #e9f7ff; } button { padding: 10px 16px; border-radius: 10px; }</textarea></label>
+              <label class="dev-editor-wide">JavaScript<textarea id="labJs" class="dev-editor" rows="9" maxlength="20000" spellcheck="false">document.getElementById('helloButton').addEventListener('click', () => {
+  document.getElementById('message').textContent = 'أحسنت! الكود يعمل.';
+  console.log('تم الضغط على الزر');
+});</textarea></label>
+            </div>
+            <div class="form-actions"><button id="labRun" class="primary-button" type="button">▶ تشغيل المعاينة</button><button id="labStop" class="small-button" type="button">إيقاف</button><button id="labSave" class="small-button" type="button">حفظ في ESKO Cloud</button><button id="labReset" class="text-button" type="button">إعادة المثال</button></div>
+            <p id="labStatus" class="helper-text" role="status">لم يتم تشغيل الكود بعد.</p>
+            <iframe id="labFrame" class="dev-preview-frame" title="معاينة كود داخل إطار معزول" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+            <div id="labConsole" class="dev-console" aria-live="polite">مخرجات console ستظهر هنا.</div>
+          </div>
+          <div class="panel notice-panel"><span class="notice-icon">!</span><div><b>حدود العزل</b><p>الإطار معزول عن DOM الصفحة الأساسية ومقيد من الاتصال الشبكي المعتاد. هذا ليس بديلًا عن بيئة تشغيل احترافية أو حاوية نظام تشغيل، وقد يستهلك كود غير منتهٍ موارد المتصفح قبل إيقافه.</p></div></div>
+        </section>
+
+        <section class="page dev-page" id="page-learning-paths">
+          <div class="page-title"><span class="eyebrow">LEARNING PATHS</span><h1>🧭 مسارات التعلم</h1><p>خطط متدرجة للمواقع والبايثون وتطبيقات الهاتف والذكاء الاصطناعي. تقدمك محفوظ محليًا على هذا المتصفح.</p></div>
+          <div class="dev-stats-grid"><div class="panel stat-card"><small>المسارات</small><strong>4</strong></div><div class="panel stat-card"><small>المراحل</small><strong>20</strong></div><div class="panel stat-card"><small>نسبة الإكمال</small><strong id="pathsProgress">0%</strong></div></div>
+          <div id="learningPathGrid" class="dev-path-grid"></div>
+          <div class="panel content-panel"><h3>اختبار قصير لتثبيت المعرفة</h3><p id="pathQuizQuestion" class="helper-text">اختر مسارًا ثم افتح أحد الدروس لإظهار سؤال التحقق.</p><div id="pathQuizOptions" class="dev-quiz-options"></div><p id="pathQuizStatus" class="helper-text" role="status"></p></div>
+        </section>
+
+        <section class="page dev-page" id="page-security-ops">
+          <div class="page-title"><span class="eyebrow">DEVELOPER OPERATIONS</span><h1>🛡 مركز مراقبة المطور</h1><p>مراقبة تشغيل الصفحة محليًا، مع قائمة تحقق لإعدادات النشر الآمن. هذه اللوحة ليست فاحص اختراق أو بديلًا عن تدقيق أمني مستقل.</p></div>
+          <div class="dev-stats-grid"><div class="panel stat-card"><small>حالة الاتصال</small><strong id="opsOnline">—</strong></div><div class="panel stat-card"><small>أحداث الصفحة</small><strong id="opsEventCount">0</strong></div><div class="panel stat-card"><small>السياق الآمن</small><strong id="opsSecureContext">—</strong></div></div>
+          <div class="panel content-panel"><div class="education-heading"><div><h3>مؤشرات التشغيل</h3><p class="helper-text">الأحداث تسجل محليًا ولا تُرسل تلقائيًا.</p></div><button id="opsRefresh" class="small-button" type="button">تحديث الفحص</button></div><div id="opsChecks" class="dev-check-list"></div></div>
+          <div class="panel content-panel"><h3>قائمة تحقق النشر</h3><div id="opsChecklist" class="dev-check-list"></div><p class="helper-text">لا تعتبر العلامات المحلية إثباتًا لأمان الخادم. يلزم إعداد HTTPS وCSP وخادم تسجيل الدخول وحدود المعدل والنسخ الاحتياطي.</p></div>
+          <div class="panel content-panel"><div class="education-heading"><div><h3>سجل الأحداث المحلي</h3><p class="helper-text">الأخطاء وحالات الاتصال في جلسة المتصفح.</p></div><button id="opsClearEvents" class="text-button" type="button">مسح السجل</button></div><div id="opsEventLog" class="dev-console">لا توجد أحداث.</div></div>
+        </section>
+
+        <section class="page dev-page" id="page-cloud">
+          <div class="page-title"><span class="eyebrow">ESKO CLOUD WORKSPACE</span><h1>☁ مساحة مشاريع ESKO</h1><p>احفظ مشاريعك محليًا، استوردها وصدر نسخة احتياطية. التخزين السحابي الحقيقي بين الأجهزة يحتاج خادمًا موثوقًا.</p></div>
+          <div class="dev-stats-grid"><div class="panel stat-card"><small>المشاريع المحفوظة</small><strong id="cloudProjectCount">0</strong></div><div class="panel stat-card"><small>حالة التخزين</small><strong id="cloudStorageState">محلي</strong></div><div class="panel stat-card"><small>آخر نسخة</small><strong id="cloudLastBackup">—</strong></div></div>
+          <div class="panel content-panel"><h3>حفظ مشروع جديد</h3><form id="cloudProjectForm" class="form-grid"><label>اسم المشروع<input id="cloudProjectName" maxlength="80" required placeholder="مشروعي الأول"></label><label>نوع المشروع<select id="cloudProjectType"><option value="javascript">JavaScript</option><option value="html">HTML / CSS</option><option value="python">Python</option><option value="other">ملفات أو ملاحظات</option></select></label><label>محتوى المشروع<textarea id="cloudProjectContent" rows="7" maxlength="250000" required placeholder="الصق الكود أو الوصف هنا..."></textarea></label><button class="primary-button" type="submit">حفظ المشروع على هذا الجهاز</button></form></div>
+          <div class="panel content-panel"><div class="education-heading"><div><h3>مشاريعي</h3><p class="helper-text">الملفات مخزنة في IndexedDB على نفس المتصفح.</p></div><div class="form-actions"><button id="cloudExport" class="small-button" type="button">تصدير نسخة</button><button id="cloudImportButton" class="small-button" type="button">استيراد نسخة</button><input id="cloudImportFile" class="hidden" type="file" accept="application/json,.json"></div></div><div id="cloudProjectList" class="dev-addon-grid"></div></div>
+          <div class="panel notice-panel"><span class="notice-icon">☁</span><div><b>مزامنة بين الأجهزة</b><p>خيار المزامنة لن يرسل شيئًا إلا بعد موافقتك، وعند وجود endpoint خادم /api/cloud/projects/sync مع مصادقة وحماية CSRF. لا توجد مزامنة سحابية فعلية دون تجهيز الخادم.</p><label class="dev-check"><input id="cloudSyncConsent" type="checkbox"> أوافق على محاولة مزامنة مشاريعي إلى خادم ESKO إذا كان متاحًا</label><button id="cloudSync" class="small-button" type="button">محاولة مزامنة آمنة</button><p id="cloudSyncStatus" class="helper-text" role="status">المشاريع محلية حاليًا.</p></div></div>
+        </section>
+
+        <section class="page dev-page" id="page-addon-market">
+          <div class="page-title"><span class="eyebrow">ESKO ADD-ON MARKET</span><h1>🧩 متجر الإضافات</h1><p>قوالب ومكونات وصفية آمنة يمكن تثبيتها محليًا. لا ينفذ المتجر JavaScript يرفعه المستخدم، ويحتاج النشر العام لمراجعة وموافقة خادم.</p></div>
+          <div class="education-filters"><input id="addonSearch" type="search" placeholder="ابحث عن إضافة..." aria-label="بحث الإضافات"><select id="addonCategory"><option value="all">كل الأنواع</option><option value="dashboard">لوحة</option><option value="theme">مظهر</option><option value="prompt">قالب AI</option><option value="lesson">تعليم</option><option value="checklist">قائمة تحقق</option></select></div>
+          <div class="dev-stats-grid"><div class="panel stat-card"><small>إضافات جاهزة</small><strong id="addonAvailableCount">12</strong></div><div class="panel stat-card"><small>مثبتة محليًا</small><strong id="addonInstalledCount">0</strong></div></div>
+          <div id="addonMarketGrid" class="dev-addon-grid"></div>
+          <div class="panel content-panel"><h3>إنشاء إضافة وصفية</h3><form id="addonCreateForm" class="form-grid"><label>اسم الإضافة<input id="addonNewName" maxlength="60" required></label><label>وصفها<input id="addonNewDescription" maxlength="180" required></label><label>النوع<select id="addonNewCategory"><option value="dashboard">لوحة</option><option value="theme">مظهر</option><option value="prompt">قالب AI</option><option value="lesson">تعليم</option><option value="checklist">قائمة تحقق</option></select></label><button class="small-button" type="submit">إنشاء وتثبيت محليًا</button></form><p class="helper-text">الإضافات المخصصة تحفظ كبيانات فقط ولا تشغّل كودًا مرفوعًا. نشرها للآخرين يتطلب مراجعة وإدارة محتوى.</p></div>
+        </section>
+
+        <section class="page dev-page" id="page-challenges">
+          <div class="page-title"><span class="eyebrow">ESKO CHALLENGES</span><h1>🏆 التحديات والمسابقات</h1><p>تدريبات برمجية قصيرة ونقاط خبرة وشارات. سجل النقاط خاص بهذا المتصفح وليس ترتيبًا عامًا على الإنترنت.</p></div>
+          <div class="dev-stats-grid"><div class="panel stat-card"><small>نقاطك</small><strong id="challengePoints">0</strong></div><div class="panel stat-card"><small>المكتمل</small><strong id="challengeCompleted">0 / 12</strong></div><div class="panel stat-card"><small>مستواك</small><strong id="challengeLevel">مبتدئ</strong></div></div>
+          <div class="panel content-panel"><h3>اختر تحديًا</h3><div id="challengeGrid" class="dev-challenge-grid"></div></div>
+          <div class="panel content-panel"><div class="education-heading"><div><h3>لوحة إنجازاتك المحلية</h3><p class="helper-text">لا يظهر مستخدمون آخرون هنا؛ النقاط محفوظة على جهازك.</p></div><button id="challengeReset" class="text-button" type="button">إعادة تعيين النقاط</button></div><div id="challengeBadges" class="dev-badges"></div></div>
+        </section>
+
+        <section class="page" id="page-account">
+          <div class="page-title"><span class="eyebrow">IDENTITY</span><h1>الحساب</h1><p>أنشئ اسم مستخدم فريدًا، واحفظ رمز الاسترجاع في مكان آمن.</p></div>
+          <div id="accountStatus" class="panel account-status"><b>غير مسجل الدخول</b><span>التسجيل يحتاج خادم API منشورًا ومتصلًا.</span></div><p id="accountServiceHint" class="helper-text" role="status">واجهة GitHub Pages تعرض الموقع فقط؛ الحسابات تحتاج إعداد خادم API منفصل.</p>
+          <div class="panel notice-panel"><span class="notice-icon">🛡</span><div><b>حماية الحسابات</b><p>كلمات المرور الجديدة تتطلب 12 حرفًا على الأقل. التخزين الآمن، تحديد محاولات الدخول، الجلسات HttpOnly، والتحقق بخطوتين يجب أن ينفذها خادم API؛ لن نخزن كلمة المرور أو رمز الجلسة في المتصفح.</p><small id="authSecurityState">حالة الخادم: يلزم تفعيل إعدادات الأمان في الخادم قبل استخدام الحسابات العامة.</small></div></div>
+          <div class="panel content-panel"><h3>إنشاء حساب جديد</h3><form id="registerForm" class="form-grid"><label>الاسم الظاهر<input name="displayName" maxlength="40" required></label><label>اسم المستخدم الفريد<input name="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]+" required></label><label>السن<input name="age" type="number" min="13" max="17" required></label><label>كلمة مرور جديدة<input name="password" type="password" minlength="12" autocomplete="new-password" required></label><p id="passwordStrength" class="helper-text">يفضل 12 حرفًا أو أكثر مع تنوع الأحرف والأرقام والرموز.</p><button class="primary-button" type="submit">إنشاء الحساب أونلاين</button></form><div id="recoveryReveal" class="recovery-box hidden"></div></div>
+          <div class="panel content-panel"><h3>تسجيل الدخول</h3><form id="loginForm" class="form-grid"><label>اسم المستخدم<input name="username" autocomplete="username" required></label><label>كلمة المرور<input name="password" type="password" autocomplete="current-password" required></label><button class="primary-button" type="submit">دخول</button></form><button id="logoutButton" class="text-button">تسجيل الخروج</button></div>
+          <div class="panel content-panel"><h3>استرجاع الحساب</h3><form id="recoverForm" class="form-grid"><label>اسم المستخدم<input name="username" required></label><label>رمز الاسترجاع الاحتياطي<input name="recoveryCode" required></label><label>كلمة المرور الجديدة<input name="newPassword" type="password" minlength="12" autocomplete="new-password" required></label><button class="small-button" type="submit">استرجاع وتغيير كلمة المرور</button></form></div>
+          <div class="panel content-panel"><h3>الصورة الشخصية</h3><input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"><img id="avatarPreview" class="avatar-preview hidden" alt="معاينة الصورة الشخصية"><p class="helper-text">تُضغط الصورة إلى WebP بحجم مستهدف لا يتجاوز 300KB، وتُحفظ على الخادم عند تسجيل الدخول حتى تظهر في جلسات الموقع والتطبيق على نفس الحساب.</p></div>
+        </section>
+
+        <section class="page" id="page-support">
+          <div class="page-title"><span class="eyebrow">OFFICIAL CHANNELS</span><h1>الدعم والقنوات</h1></div>
+          <div class="support-grid">
+            <a class="panel support-card" href="https://whatsapp.com/channel/0029VbE7vGO4tRrwmz95M73S" target="_blank" rel="noopener"><span>♕</span><b>القناة الرسمية</b><small>ESKO JOKER</small></a>
+            <a class="panel support-card" href="https://whatsapp.com/channel/0029VbEH9N2LY6d4aZ8FRW0I" target="_blank" rel="noopener"><span>⌘</span><b>أكاديمية البرمجة</b><small>تعلم البرمجة</small></a>
+            <a class="panel support-card" href="https://whatsapp.com/channel/0029Vb9NAZoKAwEu7UjBxJ02" target="_blank" rel="noopener"><span>▤</span><b>قناة التعليمات</b><small>أوامر وإرشادات</small></a>
+          </div>
+          <a class="primary-link" data-random-support href="https://wa.me/963993825873" rel="noopener">محادثة فريق الدعم عبر واتساب</a>
+        </section>
+
+        <section class="page" id="page-notes">
+          <div class="page-title"><span class="eyebrow">PERSONAL SPACE</span><h1>ملاحظاتك</h1><p>ملاحظاتك محفوظة في وحدة التخزين الداخلية للواجهة على هذا الجهاز.</p></div>
+          <div class="panel content-panel"><textarea id="noteInput" rows="9" maxlength="20000" placeholder="اكتب ملاحظتك هنا..."></textarea><div class="form-actions"><button id="saveNote" class="primary-button">حفظ الملاحظة</button><button id="clearNote" class="small-button">مسح النص</button></div><p id="noteState" class="helper-text">لم يتم الحفظ بعد.</p></div>
+          <a class="primary-link" data-random-support href="https://wa.me/963993825873" rel="noopener">محادثة الدعم الفني</a>
+        </section>
+
+        <section class="page" id="page-memory">
+          <div class="page-title"><span class="eyebrow">LOCAL DATA CORE</span><h1>وحدة الذاكرة</h1><p>مساحة البيانات المحلية الخاصة بالواجهة على هذا الجهاز.</p></div>
+          <div class="stats-grid"><div class="panel stat-card"><small>الملاحظات</small><strong id="memoryNotes">—</strong></div><div class="panel stat-card"><small>الصورة الشخصية</small><strong id="memoryAvatar">—</strong></div><div class="panel stat-card"><small>الثيم</small><strong id="memoryTheme">—</strong></div><div class="panel stat-card"><small>المساحة التقريبية</small><strong id="memoryUsage">—</strong></div></div>
+          <div class="panel content-panel"><h3>بيانات هذا الجهاز</h3><p class="helper-text">الملاحظات والإعدادات والصورة الشخصية تحفظ محليًا في IndexedDB. الحسابات والرسائل في ملف قاعدة بيانات الخادم المحلي. هذه الوحدة لا تضمن النسخ الاحتياطي التلقائي ولا تشفير بيانات المتصفح.</p><button id="exportLocalBackup" class="primary-button">تصدير نسخة من البيانات المحلية</button><p class="helper-text">النسخة المصدّرة قد تحتوي على ملاحظات خاصة وصورة شخصية؛ احتفظ بها في مكان آمن ولا تشاركها.</p></div>
+        </section>
+
+        <section class="page" id="page-termux">
+          <div class="page-title"><span class="eyebrow">TERMUX WORKSPACE</span><h1 class="termux-title">ESKO</h1><p>واجهة ESKO لقسم تريمكس.</p></div>
+          <div class="panel terminal-panel"><div class="terminal-top"><span class="termux-app-icon">▣</span><b>ESKO TERMINAL</b><span class="terminal-lights">● ● ●</span></div><div id="terminalOutput" class="terminal-output"><p>ESKO V8.3 · مساحة أوامر تعليمية</p><p>اكتب <b>help</b> لعرض الأوامر المتاحة.</p></div><form id="terminalForm" class="terminal-input"><span>$</span><input id="terminalCommand" autocomplete="off" spellcheck="false" placeholder="اكتب أمرًا..." aria-label="أمر تريمكس"><button type="submit">تنفيذ</button></form></div>
+          <p class="helper-text">دي واجهة أوامر محلية آمنة وليست طرفية Android حقيقية. تشغيل أوامر نظام الهاتف من داخل التطبيق يحتاج تكاملًا أصليًا وصلاحيات Android لم تُرفق ملفاتها بعد.</p>
+        </section>
+
+
+        <section class="page" id="page-security">
+          <div class="page-title"><span class="eyebrow">DEFENCE & PRIVACY CENTER</span><h1>مركز الحماية</h1><p>مراقبة محلية، مراجعة سلبية لإعدادات الموقع، فحص توافق المتصفح، وتشفير ملفاتك على جهازك.</p></div>
+          <div class="stats-grid">
+            <div class="panel stat-card"><small>حالة مراقبة الصفحة</small><strong id="securityMonitorState">نشطة محليًا</strong></div>
+            <div class="panel stat-card"><small>أحداث المراقبة</small><strong id="securityEventCount">0</strong></div>
+            <div class="panel stat-card"><small>Service Worker</small><strong id="serviceWorkerState">قيد التهيئة</strong></div>
+            <div class="panel stat-card"><small>إذن الإشعارات</small><strong id="notificationState">لم يُطلب</strong></div>
+          </div>
+          <div class="panel content-panel">
+            <h3>مراقبة وفحص إعدادات الموقع</h3>
+            <p class="helper-text">المراقب يتابع أخطاء الصفحة ومخالفات CSP وحالة الاتصال محليًا. الفحص لا يستغل الثغرات ولا يفحص الخادم أو نظام تشغيل الزائر.</p>
+            <div class="form-actions"><button id="runSecurityAudit" class="primary-button" type="button">فحص إعدادات الموقع</button><button id="runVisitorCheck" class="small-button" type="button">فحص توافق المتصفح</button></div>
+            <p id="securityAuditStatus" class="helper-text" role="status">ابدأ الفحص لعرض مؤشرات الحماية المتاحة.</p>
+            <div id="securityAuditResults" class="security-results"></div>
+          </div>
+          <div class="panel content-panel">
+            <h3>المساعد الأمني الذكي</h3>
+            <p class="helper-text">يحلل ملفات JavaScript من نفس الموقع وقواعد أمان محلية. لا يغيّر ملفات الخادم ولا يطبق ترقيعات برمجية تلقائية غير مضمونة.</p>
+            <button id="securityAIButton" class="primary-button" type="button">تحليل المؤشرات واقتراح الإصلاح</button>
+            <div id="securityAIOutput" class="security-ai-output" aria-live="polite">لم يبدأ التحليل بعد.</div>
+          </div>
+          <div class="panel content-panel">
+            <h3>فحص توافق بيئة الزائر</h3>
+            <p id="visitorCheckSummary" class="helper-text">اضغط فحص توافق المتصفح لعرض الإمكانيات المتاحة. النتيجة لا تكشف الفيروسات ولا تثبت أن الجهاز خالٍ من الاختراق.</p>
+            <div id="visitorCheckResults" class="security-results"></div>
+          </div>
+          <div class="panel content-panel">
+            <h3>إشعارات التطبيق</h3>
+            <p class="helper-text">يمكن إرسال إشعار اختبار بعد موافقة المستخدم. الإشعارات الفعلية من الخادم تحتاج اشتراك Push وربطه بخادم إرسال موثوق.</p>
+            <button id="enableAppNotifications" class="primary-button" type="button">تفعيل الإشعارات وإرسال اختبار</button><p id="notificationServiceHint" class="helper-text" role="status">الإشعار الاختباري محلي. إشعارات الخادم تحتاج مفتاح VAPID وخدمة Push backend.</p>
+          </div>
+          <div class="panel content-panel">
+            <h3>تشفير الملفات وحمايتها</h3>
+            <p class="helper-text">تشفير AES-256-GCM مع اشتقاق مفتاح PBKDF2 يتم داخل المتصفح. لا يتم رفع الملف أو حفظ عبارة المرور. الحد الأقصى 25MB. انْسَ عبارة المرور يعني عدم القدرة على استعادة الملف.</p>
+            <div class="security-file-box">
+              <h4>تشفير ملف</h4>
+              <label>اختر الملف<input id="securePlainFile" type="file"></label>
+              <label>عبارة مرور قوية<input id="secureEncryptPass" type="password" minlength="12" autocomplete="new-password" placeholder="12 حرفًا على الأقل"></label>
+              <label>تأكيد عبارة المرور<input id="secureEncryptConfirm" type="password" minlength="12" autocomplete="new-password"></label>
+              <button id="encryptFileButton" class="primary-button" type="button">تشفير وتنزيل الملف</button>
+              <p id="encryptFileStatus" class="helper-text" role="status">اختر ملفًا وكلمة مرور ثم ابدأ التشفير.</p>
+            </div>
+            <div class="security-file-box">
+              <h4>فك تشفير ملف ESKO</h4>
+              <label>اختر الملف المشفر<input id="secureEncryptedFile" type="file" accept=".esko.enc,.enc,application/json"></label>
+              <label>عبارة المرور<input id="secureDecryptPass" type="password" autocomplete="current-password"></label>
+              <button id="decryptFileButton" class="small-button" type="button">فك التشفير وتنزيل الأصل</button>
+              <p id="decryptFileStatus" class="helper-text" role="status">اختر ملف ESKO المشفر وأدخل عبارة المرور نفسها.</p>
+            </div>
+            <p class="helper-text">هذا يحمي الملفات التي تختار تشفيرها هنا. الملفات الموجودة سابقًا في IndexedDB أو التنزيلات لا تُشفّر تلقائيًا بهذه الخطوة.</p>
+          </div>
+          <div class="panel content-panel">
+            <h3>سجل المراقبة المحلي</h3>
+            <p class="helper-text">السجل يبقى داخل ذاكرة الصفحة الحالية ولا يُرسل إلى أي جهة.</p>
+            <div id="securityEventLog" class="security-event-log">لا توجد أحداث بعد.</div>
+          </div>
+        </section>
+
+        <section class="page" id="page-scanner">
+          <div class="page-title"><span class="eyebrow">AUTHORIZED SITE REVIEW</span><h1>المؤمّن</h1><p>فحص سلبي لإعدادات موقع تملكه أو لديك تصريح صريح بفحصه.</p></div>
+          <div class="panel content-panel"><form id="scanForm" class="form-grid"><label>عنوان الموقع<input id="scanUrl" type="url" inputmode="url" placeholder="https://example.com" required></label><label class="check-line"><input id="scanAuthorize" type="checkbox" required> أؤكد أني مالك الموقع أو لدي تصريح واضح بفحصه.</label><button class="primary-button" type="submit">بدء الفحص الآمن</button></form><p class="helper-text">لا يوجد استغلال للثغرات أو تخمين كلمات مرور أو فحص منافذ أو زحف للمسارات. النطاقات العامة المعروفة محظورة داخل القائمة المبدئية، والقائمة ليست ضمانًا بحصر كل المواقع المعروفة.</p></div>
+          <div id="scanResults" class="panel content-panel hidden"><h3>نتيجة الفحص</h3><p class="muted">13 مؤشر إعداد سلبي، وليست 13 عملية اختراق أو فحص كامل للهاتف.</p><div id="scanList" class="scan-list"></div><p class="helper-text">المصدر المرجعي: OWASP Secure Headers Project. النتيجة لا تثبت خلو الموقع من الثغرات.</p><a href="https://owasp.org/projects/secure-headers-project" target="_blank" rel="noopener">مرجع OWASP</a></div>
+        </section>
+
+        <section class="page" id="page-disclaimer">
+          <div class="page-title"><span class="eyebrow">USAGE POLICY</span><h1>إخلاء المسؤولية وبنود الاستخدام</h1><p>راجع القواعد قبل استخدام الأدوات أو مشاركة المحتوى.</p></div>
+          <div class="panel content-panel disclaimer-copy">
+            <h3>1. الاستخدام القانوني والمسؤول</h3><p>تُستخدم المنظومة للتعلم والإنتاجية والمحتوى المسموح فقط. يتحمل المستخدم مسؤولية احترام القوانين المحلية وحقوق الملكية الفكرية وشروط الخدمات الخارجية.</p>
+            <h3>2. الحسابات والخصوصية</h3><p>لا تشارك كلمة المرور أو رمز الاسترجاع أو البيانات الشخصية. استخدم كلمة مرور فريدة. لا تُرسل الصور والرسائل إلا بموافقة أصحابها. تظل بيانات الحساب على خادم الموقع الذي تديره الجهة المشغلة.</p>
+            <h3>3. الرسائل والمناقشات</h3><p>تُحذف الرسائل من قاعدة المحادثات بعد سبع ساعات من إنشائها في هذا الإصدار. هذا لا يلغي احتمال وجود نسخ لدى المستلمين أو نسخ احتياطية تشغيلية لدى مزود الاستضافة. استخدم الإبلاغ والحظر عند الحاجة.</p>
+            <h3>4. الأدوات والبوتات والألعاب</h3><p>الكتالوج يضم بطاقات تعريفية؛ لا يعني ظهور البطاقة أن محركها جاهز. البوتات تحتاج موائمات وحسابات رسمية. الألعاب التي لم يُرفق لها محرك محلي موثوق تظهر على أنها غير مفعّلة.</p>
+            <h3>5. الفحص التقني</h3><p>لا تفحص إلا موقعًا تملكه أو لديك إذن مكتوب بفحصه. تقارير الترويسات مؤشرات محدودة ولا تمثل تدقيقًا أمنيًا شاملًا أو ضمانًا بعدم وجود ثغرات.</p>
+            <h3>6. حدود الأداء والتوافر</h3><p>تقوم المنظومة بتحسين تحميل الصور والرسوم وإدارة الواجهات. لا يمكن للتطبيق إنشاء معالجات CPU أو زيادة سرعة الشبكة الفعلية أو ضمان العمل في كل جهاز. يعتمد التوافر على الشبكة والخادم والجهاز.</p>
+            <h3>7. الخدمات الخارجية</h3><p>قد تتغير شروط أو واجهات الخدمات المرتبطة. لا تُعد أي خدمة خارجية مفعّلة إلا بعد ضبط بياناتها واختبارها. لا تضع مفاتيح API أو كلمات المرور في ملفات الواجهة العامة.</p>
+            <h3>8. حدود الضمان</h3><p>تُقدم المنظومة كما هي لأغراض الاستخدام المسؤول، دون ضمان تشغيل مستمر أو دقة مطلقة. لا يتحمل مطورو الحزمة مسؤولية سوء الاستخدام أو فقد البيانات الناتج عن الجهاز أو الشبكة أو مزود الاستضافة.</p>
+            <label class="terms-accept"><input id="disclaimerRead" type="checkbox"> قرأت البنود وفهمت حدود الخدمات والميزات.</label>
+          </div>
+        </section>
+
+        <section class="page" id="page-discussions">
+          <div class="page-title"><span class="eyebrow">COMMUNITY</span><h1>المناقشات</h1><p>المحادثة العامة، المجموعات بالدعوة، والرسائل الخاصة بطلب قبول.</p></div>
+          <div class="panel notice-panel discussion-service-hint"><span class="notice-icon">i</span><div><b>حالة خدمة المناقشات</b><p>المناقشات تحتاج خادم API وقاعدة بيانات منشورين. GitHub Pages يستضيف ملفات الواجهة فقط، لذلك لن تُرسل الرسائل حتى يتم ربط الخادم.</p></div></div><div class="panel content-panel"><div class="tabs"><button class="tab active" data-chat-tab="general">العامة</button><button class="tab" data-chat-tab="groups">المجموعات</button><button class="tab" data-chat-tab="private">الخاص</button></div>
+            <div id="chat-general" class="chat-view"><div id="generalMessages" class="messages"></div><form id="generalForm" class="chat-compose"><input name="message" maxlength="1000" placeholder="اكتب رسالة عامة..." required><button>إرسال</button></form></div>
+            <div id="chat-groups" class="chat-view hidden"><form id="createGroupForm" class="inline-form"><input name="name" maxlength="40" placeholder="اسم المجموعة" required><button class="small-button">إنشاء مجموعة</button></form><form id="joinGroupForm" class="inline-form"><input name="invite" placeholder="كود أو رابط الدعوة" required><button class="small-button">انضمام بموافقتك</button></form><div id="groupList" class="group-list"></div><div id="groupChat" class="hidden"><h3 id="groupChatTitle"></h3><div id="groupMessages" class="messages"></div><form id="groupMessageForm" class="chat-compose"><input name="message" maxlength="1000" placeholder="رسالة للمجموعة" required><button>إرسال</button></form></div></div>
+            <div id="chat-private" class="chat-view hidden"><form id="dmRequestForm" class="inline-form"><input name="username" placeholder="اسم المستخدم" required><button class="small-button">طلب مراسلة</button></form><div id="dmRequests" class="group-list"></div><div id="dmList" class="group-list"></div><div id="dmChat" class="hidden"><h3 id="dmTitle"></h3><div id="dmMessages" class="messages"></div><form id="dmMessageForm" class="chat-compose"><input name="message" maxlength="1000" placeholder="رسالة خاصة" required><button>إرسال</button></form></div></div>
+          </div>
+          <p class="helper-text">الرسائل الخاصة لا تفتح تلقائيًا: الطرف الآخر يقبل الطلب أولًا. استخدم الحظر والإبلاغ عند الإزعاج، ولا تشارك بيانات شخصية أو كلمات مرور.</p>
+        </section>
+
+        <section class="page galaxy-page" id="page-galaxy">
+          <div class="galaxy-hero panel"><div class="galaxy-copy"><span class="eyebrow">ESKO GALAXY MAP</span><h1>🌌 خريطة مجرة ESKO</h1><p>تنقّل بين عوالم الموقع عبر خريطة كونية تفاعلية.</p><div class="galaxy-hero-actions"><button class="primary-button" data-go="infinity-core">دخول النواة</button><button class="small-button" data-go="processor-universe">عرض المعالجات</button></div></div><div class="galaxy-orb" aria-hidden="true"><div class="orb-core">ESKO</div><i class="orbit orbit-a"></i><i class="orbit orbit-b"></i><i class="orbit orbit-c"></i><b class="orb-spark s1"></b><b class="orb-spark s2"></b><b class="orb-spark s3"></b></div></div>
+          <div class="galaxy-map-grid" id="galaxyMapGrid"></div>
+          <div class="panel galaxy-note"><b>ملاحظة الأداء</b><p>المؤثرات البصرية قابلة للتخفيف أو الإيقاف. الخريطة لا تحتاج WebGL أو تحميل مكتبات خارجية.</p></div>
+        </section>
+        <section class="page galaxy-page" id="page-infinity-core">
+          <div class="page-title"><span class="eyebrow">INFINITY CORE / SYSTEM ORCHESTRATOR</span><h1>♾ Infinity Core</h1><p>نواة تنظيم واجهة ESKO: تعرض حالة الوحدات وتطبّق إعدادات جودة الرسوم. ليست معالجًا ماديًا ولا ترفع تردد الهاتف.</p></div>
+          <div class="core-dashboard panel"><div class="core-ring"><div><small>ESKO CORE</small><strong id="coreState">ONLINE</strong><span id="coreQuality">جودة متوازنة</span></div></div><div class="core-metrics"><div><small>وحدات الواجهة</small><strong>12</strong></div><div><small>مجموعات النظام</small><strong>8</strong></div><div><small>مستوى المؤثرات</small><strong id="coreFxLevel">متوسط</strong></div><div><small>وضع الحركة</small><strong id="coreMotionState">تلقائي</strong></div></div></div>
+          <div class="panel content-panel"><div class="education-heading"><div><h3>التحكم في النواة</h3><p class="helper-text">اختر مستوى المؤثرات حسب قدرة جهازك.</p></div><span class="tag">Adaptive UI</span></div><div class="core-controls"><label>جودة الرسوم<select id="coreQualitySelect"><option value="auto">تلقائي حسب الجهاز</option><option value="high">عالية</option><option value="balanced">متوازنة</option><option value="lite">خفيفة</option></select></label><label class="dev-check"><input id="coreMotionToggle" type="checkbox" checked> تفعيل الحركة والمؤثرات</label><label class="dev-check"><input id="coreParticlesToggle" type="checkbox" checked> تفعيل نجوم الخلفية</label><label class="dev-check"><input id="coreGlassToggle" type="checkbox" checked> تفعيل تأثير الزجاج</label></div><p id="coreApplyStatus" class="helper-text" role="status">الإعدادات الافتراضية نشطة.</p></div>
+          <div class="core-processor-preview" id="coreProcessorPreview"></div>
+        </section>
+        <section class="page galaxy-page" id="page-processor-universe">
+          <div class="page-title"><span class="eyebrow">GALAXY PROCESSOR ARRAY</span><h1>⚡ 12 معالجًا برمجيًا</h1><p>محركات وظيفية لتحسين تجربة الواجهة، الحركة، التخزين المؤقت وإدارة المهام. لا تتحكم في CPU أو GPU مباشرة.</p></div>
+          <div class="processor-grid" id="galaxyProcessorGrid"></div>
+          <div class="panel content-panel"><h3>إحصاءات الواجهة</h3><div class="core-metrics"><div><small>Viewport</small><strong id="procViewport">—</strong></div><div><small>تفضيل الحركة</small><strong id="procReducedMotion">—</strong></div><div><small>ذاكرة المتصفح</small><strong id="procMemory">غير متاحة</strong></div><div><small>اتصال الشبكة</small><strong id="procNetwork">—</strong></div></div><p class="helper-text">المعلومات تعتمد على ما يتيحه المتصفح وقد تكون غير متوفرة أو تقريبية.</p></div>
+        </section>
+        <section class="page galaxy-page" id="page-system-universe">
+          <div class="page-title"><span class="eyebrow">ESKO OMNIVERSE</span><h1>🪐 عوالم ESKO الثمانية</h1><p>كل عالم يفتح القسم المرتبط به داخل الموقع.</p></div>
+          <div class="universe-grid" id="universeGrid"></div>
+        </section>
+<section class="page galaxy-page" id="page-omniverse">
+          <div class="panel content-panel v71-overview"><div><span class="eyebrow">ARCHIVE · V7.1</span><h2>50 ترقية سابقة في أنظمة ESKO</h2><p>سجل تحسينات سطح المكتب والمساعدين والبناء والنسخ والأتمتة والتصميم والبحث والصوت والإضافات والمشاريع والإنجازات.</p></div><strong>50</strong></div>
+          <div class="page-title"><span class="eyebrow">ESKO OS / COMMANDER</span><h1>🌐 ESKO Commander & Desktop</h1><p>سطح مكتب داخلي يفتح أدوات الموقع في نوافذ واجهة؛ ليس نظام تشغيل حقيقيًا ولا يتحكم في ملفات الجهاز.</p></div>
+          <div class="panel content-panel"><div class="os-toolbar"><b>ESKO OS · WORKSPACE</b><span id="osClock">جاهز</span><button class="small-button" id="osToggleCompact">تبديل مساحة العمل</button></div><div class="os-desktop" id="osDesktop"><button class="os-app" data-os-page="ai-studio">🧠<span>AI Studio</span></button><button class="os-app" data-os-page="code-lab">⌨️<span>Code Lab</span></button><button class="os-app" data-os-page="education">🎓<span>Education</span></button><button class="os-app" data-os-page="cloud">☁️<span>Projects</span></button><button class="os-app" data-os-page="security">🛡️<span>Security</span></button><button class="os-app" data-os-page="creator-studio">🎨<span>Creator</span></button><div class="os-dock"><span>ESKO</span><button data-os-page="omniverse">⌂</button><button data-os-page="knowledge-galaxy">⌕</button><button data-os-page="settings">⚙</button></div></div><p class="helper-text">اختار أي تطبيق لفتح القسم المرتبط به. الواجهة محاكاة سطح مكتب داخل الموقع.</p></div>
+          <div class="panel content-panel"><h3>Commander Status</h3><div class="core-metrics"><div><small>وحدات جديدة</small><strong>12</strong></div><div><small>نوع التخزين</small><strong>محلي</strong></div><div><small>AI API</small><strong>غير مربوط</strong></div><div><small>Cloud</small><strong>جاهز للربط</strong></div></div></div>
+
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">COMMANDER EXPANSION</span><h3>مساحة عمل Commander المتقدمة</h3></div><span class="v71-count">05 ميزات</span></div>
+            <div class="v71-grid"><label>بحث سريع عن تطبيق<input id="v71OsSearch" placeholder="اكتب اسم القسم أو التطبيق" autocomplete="off"></label><label>كثافة سطح المكتب<select id="v71OsDensity"><option value="normal">عادية</option><option value="compact">مضغوطة</option><option value="wide">واسعة</option></select></label></div>
+            <div class="v71-actions"><button class="small-button" id="v71OsPin">تثبيت القسم الحالي</button><button class="small-button" id="v71OsReset">إعادة ترتيب الاختصارات</button></div>
+            <div><b>اختصاراتك المثبتة</b><div id="v71OsPinned" class="v71-chip-list"></div></div><div><b>آخر الأقسام المفتوحة</b><div id="v71OsRecent" class="v71-chip-list"></div></div><div id="v71OsStatus" class="helper-text" role="status"></div>
+          </div>
+        </section>
+        <section class="page galaxy-page" id="page-ai-legion"><div class="page-title"><span class="eyebrow">MULTI-AGENT WORKBENCH</span><h1>🧠 ESKO AI Legion</h1><p>مجموعة أدوار تساعد في تقسيم المهمة. التحليل الحالي محلي وقائم على قواعد؛ ليس عدة نماذج AI حقيقية متصلة.</p></div>
+          <div class="panel content-panel"><label class="form-grid">اكتب المهمة<textarea id="legionTask" rows="3" placeholder="مثال: أريد تعلم JavaScript وإنشاء صفحة بسيطة"></textarea></label><div class="agent-grid" id="legionAgents"></div><button class="primary-button" id="runLegion">تنظيم المهمة</button><div id="legionResult" class="helper-text" role="status"></div></div>
+
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">AGENT ORCHESTRATION</span><h3>تنظيم مهام الفريق</h3></div><span class="v71-count">05 ميزات</span></div>
+            <div class="v71-grid"><label>قالب المهمة<select id="v71LegionTemplate"><option value="custom">مهمة مخصصة</option><option value="website">إنشاء موقع</option><option value="learn">خطة تعلم</option><option value="debug">تحليل خطأ</option><option value="project">تخطيط مشروع</option></select></label><label>مستوى التفصيل<select id="v71LegionDepth"><option value="quick">سريع</option><option value="balanced" selected>متوازن</option><option value="deep">تفصيلي</option></select></label></div>
+            <div><b>الأدوار المشاركة</b><div id="v71LegionRoles" class="v71-chip-list"></div></div><div class="v71-actions"><button class="small-button" id="v71LegionSave">حفظ الخطة</button><button class="small-button" id="v71LegionCopy">نسخ الخطة</button><button class="small-button" id="v71LegionExport">تصدير الخطة</button></div><div id="v71LegionHistory" class="v71-list"></div>
+          </div>
+        </section>
+        <section class="page galaxy-page" id="page-infinity-builder"><div class="page-title"><span class="eyebrow">VISUAL PAGE BUILDER</span><h1>🧱 ESKO Infinity Builder</h1><p>أنشئ صفحة بسيطة بمكونات آمنة ثم اعرضها أو صدّر HTML. لا يُشغّل إضافات خارجية.</p></div>
+          <div class="builder-layout"><div class="panel content-panel"><h3>أضف مكونات</h3><div class="builder-tools"><button class="small-button" data-add-block="heading">عنوان</button><button class="small-button" data-add-block="paragraph">فقرة</button><button class="small-button" data-add-block="button">زر</button><button class="small-button" data-add-block="card">بطاقة</button><button class="small-button" data-add-block="divider">فاصل</button></div><label>اسم الصفحة<input id="builderTitle" maxlength="80" value="مشروعي الجديد"></label><div class="form-actions"><button class="primary-button" id="builderPreview">معاينة</button><button class="small-button" id="builderSave">حفظ نسخة</button><button class="small-button" id="builderExport">تصدير HTML</button></div><p class="helper-text">اختيار مكوّن يضيفه إلى الصفحة. يمكنك تعديل النص ثم إعادة المعاينة.</p></div><div class="panel content-panel"><h3>مكونات الصفحة</h3><div id="builderBlocks" class="builder-blocks"></div><button class="text-button" id="builderClear">مسح المكونات</button></div></div><div class="panel content-panel"><h3>المعاينة</h3><iframe id="builderFrame" title="معاينة الصفحة" sandbox="" referrerpolicy="no-referrer"></iframe></div>
+
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">BUILDER PRO TOOLS</span><h3>أدوات البناء المتقدمة</h3></div><span class="v71-count">09 ميزات</span></div>
+            <div class="builder-tools v71-builder-extra"><button class="small-button" data-add-block="quote">اقتباس</button><button class="small-button" data-add-block="list">قائمة</button><button class="small-button" data-add-block="code">كود</button><button class="small-button" data-add-block="notice">تنبيه</button></div>
+            <div class="v71-grid"><label>لون الخلفية<input type="color" id="v71BuilderBg" value="#0b1020"></label><label>لون التمييز<input type="color" id="v71BuilderAccent" value="#65eaff"></label></div>
+            <div class="v71-actions"><button class="small-button" id="v71BuilderUndo">تراجع</button><button class="small-button" id="v71BuilderRedo">إعادة</button><label class="v71-inline-check"><input type="checkbox" id="v71BuilderLive" checked> معاينة مباشرة</label><button class="small-button" id="v71BuilderValidate">فحص الصفحة</button><button class="small-button" id="v71BuilderExportJson">تصدير مشروع JSON</button><label class="small-button v71-file-button">استيراد JSON<input id="v71BuilderImport" type="file" accept="application/json" hidden></label></div><div id="v71BuilderReport" class="helper-text" role="status"></div>
+          </div>
+        </section>
+        <section class="page galaxy-page" id="page-time-machine"><div class="page-title"><span class="eyebrow">LOCAL VERSION HISTORY</span><h1>⏳ ESKO Time Machine</h1><p>لقطات محلية لمشاريع Builder فقط. ليست Git ولا نسخًا احتياطيًا تلقائيًا للموقع.</p></div><div class="panel content-panel"><label>اسم النسخة<input id="snapshotName" maxlength="80" placeholder="نسخة قبل التعديل"></label><button class="primary-button" id="createSnapshot">حفظ لقطة من Builder</button><div id="snapshotList" class="snapshot-list"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">SNAPSHOT CONTROL</span><h3>إدارة لقطات المشروع</h3></div><span class="v71-count">05 ميزات</span></div><input id="v71SnapshotSearch" placeholder="ابحث في أسماء النسخ"><div class="v71-actions"><button class="small-button" id="v71SnapshotCompare">مقارنة المحدد</button><button class="small-button" id="v71SnapshotExport">تصدير المحدد</button></div><div id="v71SnapshotCompareResult" class="v71-report" role="status"></div></div>
+        </section>
+        <section class="page galaxy-page" id="page-cloud-network"><div class="page-title"><span class="eyebrow">CLOUD NETWORK</span><h1>☁️ ESKO Cloud Network</h1><p>إدارة نسخ المشاريع محليًا والاستيراد/التصدير. المزامنة عبر الإنترنت تحتاج خادمًا وحسابًا آمنًا.</p></div><div class="panel content-panel"><div class="core-metrics"><div><small>حالة السحابة</small><strong>محلي</strong></div><div><small>المزامنة الحقيقية</small><strong>غير متصلة</strong></div><div><small>تصدير</small><strong>JSON</strong></div><div><small>تحكم المستخدم</small><strong>نعم</strong></div></div><button class="primary-button" id="cloudExportV7">تصدير بيانات ESKO المحلية</button><label class="small-button cloud-import-label">استيراد نسخة JSON<input id="cloudImport" type="file" accept="application/json" hidden></label><button class="small-button" id="cloudClear">مسح بيانات النسخ المحلية</button><p class="helper-text">لا ترفع معلومات شخصية أو أسرارًا إلى ملف النسخ. راجع المحتوى قبل مشاركته.</p><div id="cloudStatus" role="status"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">LOCAL VAULT</span><h3>خزنة النسخ الاحتياطية</h3></div><span class="v71-count">04 ميزات</span></div><div class="v71-grid"><label>كلمة مرور التشفير<input id="v71VaultPassword" type="password" minlength="8" autocomplete="new-password" placeholder="8 أحرف على الأقل"></label><label>ملف النسخة المشفرة<input id="v71VaultFile" type="file" accept="application/json,.esko"></label></div><div class="v71-actions"><button class="small-button" id="v71VaultEncrypt">تشفير وتصدير النسخة</button><button class="small-button" id="v71VaultDecrypt">فك التشفير ومعاينة الاستيراد</button><button class="small-button" id="v71VaultUsage">قياس حجم البيانات</button></div><div id="v71VaultStatus" class="helper-text" role="status"></div></div>
+        </section>
+        <section class="page galaxy-page" id="page-automation-matrix"><div class="page-title"><span class="eyebrow">LOCAL WORKFLOW DESIGNER</span><h1>🔗 ESKO Automation Matrix</h1><p>أنشئ سير عمل محليًا من إجراءات محدودة وواضحة، دون تنفيذ أوامر النظام أو إرسال بيانات تلقائيًا.</p></div><div class="panel content-panel"><label>اسم سير العمل<input id="workflowName" maxlength="80" value="سير عملي"></label><label>الإجراء<select id="workflowAction"><option value="open-education">فتح أكاديمية التعليم</option><option value="open-builder">فتح Builder</option><option value="open-cloud">فتح Cloud</option><option value="save-builder">حفظ نسخة Builder</option><option value="show-tip">عرض نصيحة برمجية</option></select></label><button class="primary-button" id="workflowAdd">إضافة خطوة</button><div id="workflowSteps" class="workflow-list"></div><button class="small-button" id="workflowRun">تشغيل سير العمل</button><div id="workflowStatus" role="status"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">WORKFLOW ORCHESTRATOR</span><h3>قوالب وسجل الأتمتة</h3></div><span class="v71-count">05 ميزات</span></div><div class="v71-grid"><label>قالب جاهز<select id="v71WorkflowTemplate"><option value="">اختر قالبًا</option><option value="learn">روتين تعلم</option><option value="backup">نسخ احتياطي قبل العمل</option><option value="build">سير بناء صفحة</option></select></label><button class="small-button" id="v71WorkflowLoad">تحميل القالب</button></div><div class="v71-actions"><button class="small-button" id="v71WorkflowDryRun">معاينة بدون تنفيذ</button><button class="small-button" id="v71WorkflowExport">تصدير سير العمل</button></div><div id="v71WorkflowDryReport" class="v71-report" role="status"></div><div id="v71WorkflowLog" class="v71-list"></div></div>
+        </section>
+        <section class="page galaxy-page" id="page-creator-studio"><div class="page-title"><span class="eyebrow">VISUAL CREATOR STUDIO</span><h1>🎨 ESKO Creator Studio</h1><p>صمم ثيمك الشخصي واحفظه محليًا.</p></div><div class="panel content-panel"><div class="creator-controls"><label>لون أساسي<input type="color" id="creatorPrimary" value="#63e8ff"></label><label>لون ثانوي<input type="color" id="creatorSecondary" value="#9b7bff"></label><label>لون الخلفية<input type="color" id="creatorBackground" value="#080b1b"></label><label>اسم الثيم<input id="creatorThemeName" maxlength="40" value="My Galaxy"></label></div><div id="creatorPreview" class="creator-preview"><h2>ESKO CREATOR</h2><p>معاينة ثيمك الكوني</p><button>زر تجريبي</button></div><div class="form-actions"><button class="primary-button" id="creatorApply">تطبيق الثيم</button><button class="small-button" id="creatorSave">حفظ الثيم</button><button class="small-button" id="creatorReset">إعادة الافتراضي</button></div><div id="creatorSaved" class="saved-grid"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">THEME LAB</span><h3>مولّد الثيمات السريع</h3></div><span class="v71-count">04 ميزات</span></div><div class="v71-actions"><button class="small-button" data-v71-preset="nebula">سديم</button><button class="small-button" data-v71-preset="aurora">الشفق</button><button class="small-button" data-v71-preset="plasma">بلازما</button><button class="small-button" id="v71ThemeRandom">ألوان عشوائية</button><button class="small-button" id="v71ThemeExport">تصدير CSS</button></div><div id="v71ThemeStatus" class="helper-text" role="status"></div></div>
+        </section>
+        <section class="page galaxy-page" id="page-knowledge-galaxy"><div class="page-title"><span class="eyebrow">KNOWLEDGE GALAXY</span><h1>📚 ESKO Knowledge Galaxy</h1><p>بحث داخلي سريع عن أقسام وأدوات الموقع، مع روابط إلى توثيق لغات البرمجة.</p></div><div class="panel content-panel"><input id="knowledgeSearch" placeholder="ابحث عن قسم أو لغة أو أداة"><div id="knowledgeResults" class="knowledge-results"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">KNOWLEDGE NAVIGATOR</span><h3>فلاتر ونتائجك المفضلة</h3></div><span class="v71-count">04 ميزات</span></div><div class="v71-grid"><label>تصنيف النتائج<select id="v71KnowledgeFilter"><option value="all">الكل</option><option value="learn">التعليم</option><option value="dev">التطوير</option><option value="system">النظام</option></select></label><button class="small-button" id="v71KnowledgeClear">مسح سجل البحث</button></div><div><b>عمليات البحث الأخيرة</b><div id="v71KnowledgeHistory" class="v71-chip-list"></div></div><div><b>المفضلة</b><div id="v71KnowledgeFavorites" class="v71-chip-list"></div></div><p class="helper-text">اختصار البحث السريع: Ctrl + K أو /</p></div>
+        </section>
+        <section class="page galaxy-page" id="page-voice-control"><div class="page-title"><span class="eyebrow">OPTIONAL VOICE INTERFACE</span><h1>🎙️ ESKO Voice Control</h1><p>استخدم التعرف على الصوت إن كان المتصفح يدعمه. الصوت لا يُرسل لخادم ESKO من هذه الإضافة.</p></div><div class="panel content-panel"><button class="primary-button" id="voiceStart">بدء الاستماع</button><button class="small-button" id="voiceStop">إيقاف</button><div id="voiceStatus" role="status">لم يبدأ الاستماع.</div><textarea id="voiceTranscript" rows="3" placeholder="سيظهر النص هنا"></textarea><button class="small-button" id="voiceSpeak">قراءة النص بصوت المتصفح</button><p class="helper-text">التعرف الصوتي قد يعتمد على خدمات المتصفح الخارجية. لا تتحدث بكلمات مرور أو معلومات حساسة.</p></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">VOICE COMMAND ROUTER</span><h3>معاينة الأمر الصوتي</h3></div><span class="v71-count">02 ميزتان</span></div><div class="v71-actions"><button class="small-button" id="v71VoicePreview">تحليل النص الحالي</button><button class="primary-button" id="v71VoiceConfirm" disabled>تأكيد وفتح القسم</button></div><div id="v71VoiceCommandResult" class="helper-text" role="status">لن يتم فتح أي قسم تلقائيًا قبل التأكيد.</div></div>
+        </section>
+        <section class="page galaxy-page" id="page-plugin-factory"><div class="page-title"><span class="eyebrow">SAFE PLUGIN BLUEPRINTS</span><h1>🧩 ESKO Plugin Factory</h1><p>إنشاء بطاقة وصفية لإضافة قابلة للتصدير. لا تُنفّذ الأكواد المستوردة تلقائيًا.</p></div><div class="panel content-panel"><label>اسم الإضافة<input id="pluginName" maxlength="60" placeholder="اسم الإضافة"></label><label>وصف الإضافة<textarea id="pluginDescription" maxlength="500" rows="3"></textarea></label><label>القسم<select id="pluginCategory"><option>تعليم</option><option>إنتاجية</option><option>تصميم</option><option>أمان</option><option>برمجة</option></select></label><button class="primary-button" id="pluginCreate">إنشاء بطاقة إضافة</button><div id="pluginCards" class="plugin-cards"></div><button class="small-button" id="pluginExport">تصدير بطاقات الإضافات JSON</button></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">PLUGIN QUALITY GATE</span><h3>مراجعة وإدارة الإضافات</h3></div><span class="v71-count">04 ميزات</span></div><label>بحث في بطاقاتك<input id="v71PluginSearch" placeholder="اسم الإضافة أو وصفها"></label><div class="v71-actions"><button class="small-button" id="v71PluginExportAll">تصدير الكتالوج الكامل</button><span id="v71PluginStatus" class="helper-text"></span></div></div>
+        </section>
+        <section class="page galaxy-page" id="page-project-dna"><div class="page-title"><span class="eyebrow">PROJECT DNA</span><h1>🧬 ملف المشروع</h1><p>بيانات تعريف وملاحظات محلية لكل مشروع.</p></div><div class="panel content-panel"><form id="dnaForm" class="form-grid"><label>اسم المشروع<input name="name" maxlength="80" required></label><label>اللغة أو التقنية<input name="stack" maxlength="80" placeholder="JavaScript / HTML / CSS"></label><label>وصف المشروع<textarea name="description" maxlength="1200" rows="4"></textarea></label><label>المرحلة<select name="stage"><option>فكرة</option><option>قيد التطوير</option><option>اختبار</option><option>مكتمل</option></select></label><button class="primary-button">حفظ Project DNA</button></form><div id="dnaList" class="saved-grid"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">PROJECT REGISTRY</span><h3>بحث وإدارة سجل المشاريع</h3></div><span class="v71-count">02 ميزتان</span></div><input id="v71DnaSearch" placeholder="ابحث باسم المشروع أو التقنية أو المرحلة"><div id="v71DnaCount" class="helper-text" role="status"></div></div>
+        </section>
+        <section class="page galaxy-page" id="page-mission-center"><div class="page-title"><span class="eyebrow">MISSIONS / LOCAL PROGRESS</span><h1>🏅 ESKO Mission Center</h1><p>تحديات تعلم بسيطة، نقاط محلية وشارات. لا توجد لوحة ترتيب عامة أو مكافآت مالية.</p></div><div class="panel content-panel"><div class="core-metrics"><div><small>نقاطك</small><strong id="missionPoints">0</strong></div><div><small>المهام المكتملة</small><strong id="missionDone">0</strong></div><div><small>مستواك</small><strong id="missionLevel">مبتدئ</strong></div><div><small>المهمة اليوم</small><strong>1</strong></div></div><div id="missionList" class="mission-list"></div></div>
+          <div class="panel content-panel v71-upgrade-panel"><div class="v71-panel-heading"><div><span class="eyebrow">ACHIEVEMENT SYSTEM</span><h3>الشارات والتقدم الأسبوعي</h3></div><span class="v71-count">01 ميزة</span></div><div id="v71MissionBadges" class="v71-badge-grid"></div><div class="v71-progress"><div><span>هدف الأسبوع</span><b id="v71WeeklyText">0 / 5</b></div><progress id="v71WeeklyProgress" max="5" value="0"></progress></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-titan-core">
+          <div class="page-title"><span class="eyebrow">TITAN CORE · SYSTEM ORCHESTRATOR</span><h1>⚛ TITAN CORE</h1><p>النواة المركزية لإدارة أدوات V8، قياس موارد المتصفح المتاحة، ومتابعة صحة المحركات البرمجية. المؤشرات تقريبية ولا تتحكم في المعالج المادي.</p></div>
+          <div class="titan-metrics-grid" id="titanMetrics">
+            <article class="titan-metric"><small>محركات نشطة</small><strong id="titanActiveEngines">15</strong><span>وحدات برمجية</span></article>
+            <article class="titan-metric"><small>الذاكرة المتاحة</small><strong id="titanMemory">غير مكشوفة</strong><span>حسب المتصفح</span></article>
+            <article class="titan-metric"><small>التخزين</small><strong id="titanStorage">قيد القياس</strong><span>حصة أصل الموقع</span></article>
+            <article class="titan-metric"><small>الاتصال</small><strong id="titanNetwork">—</strong><span>حالة الشبكة</span></article>
+          </div>
+          <div class="titan-grid-two">
+            <div class="panel content-panel"><div class="titan-panel-head"><h3>مركز العمليات</h3><button class="small-button" id="titanRefresh">تحديث القياسات</button></div><div class="titan-health-list" id="titanHealthList"></div></div>
+            <div class="panel content-panel"><div class="titan-panel-head"><h3>سجل النواة</h3><button class="small-button" id="titanClearLog">مسح السجل</button></div><div id="titanEventLog" class="titan-event-log" aria-live="polite"></div></div>
+          </div>
+          <div class="panel content-panel"><h3>لوحة إدارة الموارد</h3><div class="titan-control-row"><label>جودة المعاينة<select id="titanQuality"><option value="auto">تلقائي</option><option value="high">عالية</option><option value="balanced">متوازنة</option><option value="lite">خفيفة</option></select></label><label>مستوى سجل الأحداث<select id="titanLogLevel"><option value="all">كل الأحداث</option><option value="important">المهمة فقط</option></select></label><button class="primary-button" id="titanRunDiagnostics">تشغيل التشخيص</button></div><p class="helper-text" id="titanCoreStatus" role="status">النواة جاهزة محليًا.</p></div>
+        </section>
+
+        <section class="page titan-page" id="page-ai-factory">
+          <div class="page-title"><span class="eyebrow">ESKO AI FACTORY</span><h1>🧠 مصنع المشاريع الذكي</h1><p>حوّل وصف فكرتك إلى خطة وهيكل ملفات أولي. التحليل الحالي محلي بقواعد وقوالب؛ ربط نموذج توليدي يحتاج وسيط خادم آمن.</p></div>
+          <div class="panel content-panel"><div class="titan-form-grid"><label>اسم المشروع<input id="aiFactoryName" maxlength="70" placeholder="مثال: متجر ألعاب فضائي"></label><label>نوع المشروع<select id="aiFactoryType"><option value="website">موقع ويب</option><option value="dashboard">لوحة تحكم</option><option value="portfolio">معرض أعمال</option><option value="pwa">تطبيق ويب PWA</option><option value="landing">صفحة تعريفية</option></select></label><label class="titan-wide">صف الفكرة<textarea id="aiFactoryPrompt" rows="5" maxlength="2500" placeholder="اكتب فكرة المشروع، الصفحات المطلوبة، الألوان والوظائف الأساسية..."></textarea></label><label>لغة الواجهة<select id="aiFactoryLanguage"><option value="ar">العربية</option><option value="en">English</option><option value="both">عربي وإنجليزي</option></select></label><label>مستوى التفاصيل<select id="aiFactoryDepth"><option value="starter">بداية بسيطة</option><option value="standard" selected>متوازن</option><option value="advanced">متقدم</option></select></label></div><div class="titan-actions"><button class="primary-button" id="aiFactoryGenerate">حلّل الفكرة وابنِ الخطة</button><button class="small-button" id="aiFactoryClear">مسح</button></div><div id="aiFactoryResult" class="titan-output" aria-live="polite"><p>اكتب فكرتك لعرض تحليل محلي وخطوات تنفيذ مقترحة.</p></div><div class="titan-actions"><button class="small-button" id="aiFactoryExportPlan" disabled>تصدير الخطة JSON</button><button class="small-button" id="aiFactoryCreateScaffold" disabled>إنشاء ملفات البداية</button></div><div id="aiFactoryFiles" class="titan-file-list"></div></div>
+          <div class="panel content-panel titan-note"><b>ربط الذكاء الاصطناعي الحقيقي</b><p>لا تضع API Key في JavaScript أو ملفات الموقع. الربط الآمن يتم عبر API وسيط على خادم، مع حفظ المفتاح في متغيرات بيئة الخادم والتحقق من صلاحيات المستخدم وحدود الاستخدام.</p></div>
+        </section>
+
+        <section class="page titan-page" id="page-reality-builder">
+          <div class="page-title"><span class="eyebrow">REALITY BUILDER</span><h1>🪄 منشئ الواجهات البصري</h1><p>ابنِ صفحة من مكونات آمنة، غيّر النصوص والألوان، أعد ترتيب العناصر، وشاهد معاينة معزولة قبل التصدير.</p></div>
+          <div class="titan-builder-layout"><div class="panel content-panel"><h3>مكتبة المكونات</h3><div class="titan-component-palette"><button class="small-button" data-reality-add="hero">واجهة رئيسية</button><button class="small-button" data-reality-add="text">نص</button><button class="small-button" data-reality-add="card">بطاقة</button><button class="small-button" data-reality-add="features">مميزات</button><button class="small-button" data-reality-add="cta">دعوة لاتخاذ إجراء</button><button class="small-button" data-reality-add="footer">تذييل</button></div><div class="titan-control-row"><label>لون الصفحة<input id="realityBackground" type="color" value="#080d20"></label><label>لون التمييز<input id="realityAccent" type="color" value="#65eaff"></label></div><div class="titan-actions"><button class="primary-button" id="realityPreview">تحديث المعاينة</button><button class="small-button" id="realityExport">تصدير HTML</button><button class="small-button" id="realityReset">إعادة ضبط</button></div><div class="titan-block-list" id="realityBlocks"></div></div><div class="panel content-panel titan-preview-panel"><div class="titan-panel-head"><h3>المعاينة الحية</h3><span class="titan-status-dot">معزولة</span></div><iframe id="realityFrame" title="معاينة منشئ الواجهات" sandbox="" referrerpolicy="no-referrer"></iframe><p class="helper-text">تُعرض الصفحة داخل إطار بلا صلاحيات برمجية أو وصول إلى ملفات الموقع.</p></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-app-factory">
+          <div class="page-title"><span class="eyebrow">APP FACTORY</span><h1>📦 مصنع التطبيقات</h1><p>أنشئ قوالب أولية لمشاريع الويب وPWA ولوحات التحكم ومحافظ الأعمال، ثم صدّر مواصفات المشروع أو ملف HTML جاهزًا للبداية.</p></div>
+          <div class="panel content-panel"><div class="titan-form-grid"><label>اسم التطبيق<input id="appFactoryName" maxlength="70" value="My ESKO App"></label><label>نوع القالب<select id="appFactoryTemplate"><option value="pwa">تطبيق ويب PWA</option><option value="dashboard">لوحة تحكم</option><option value="portfolio">معرض أعمال</option><option value="store">متجر بسيط</option><option value="landing">صفحة هبوط</option></select></label><label>اللون الأساسي<input id="appFactoryColor" type="color" value="#69d9ff"></label><label>لغة المشروع<select id="appFactoryLang"><option value="ar">العربية</option><option value="en">English</option></select></label></div><div class="titan-actions"><button class="primary-button" id="appFactoryBuild">توليد هيكل التطبيق</button><button class="small-button" id="appFactoryExport">تصدير ملفات المشروع JSON</button><button class="small-button" id="appFactoryHtml">تنزيل صفحة HTML</button></div><div id="appFactoryResult" class="titan-output" aria-live="polite"></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-code-compiler">
+          <div class="page-title"><span class="eyebrow">CODE COMPILER / REVIEW</span><h1>🧪 محلل ومراجع الأكواد</h1><p>مراجعة ثابتة للكود واكتشاف أنماط خطرة وأخطاء شائعة. لا يشغّل الكود داخل هذه الصفحة ولا يمثل مترجمًا كاملًا لكل اللغات.</p></div>
+          <div class="panel content-panel"><div class="titan-control-row"><label>اللغة<select id="codeReviewLanguage"><option value="javascript">JavaScript</option><option value="html">HTML</option><option value="css">CSS</option><option value="python">Python (مراجعة نصية)</option><option value="sql">SQL (مراجعة نصية)</option></select></label><label>مستوى الفحص<select id="codeReviewLevel"><option value="standard">أساسي</option><option value="strict">أكثر تشددًا</option></select></label></div><label>الصق الكود<textarea id="codeReviewInput" rows="12" spellcheck="false" placeholder="الصق الكود هنا للمراجعة..."></textarea></label><div class="titan-actions"><button class="primary-button" id="codeReviewRun">تحليل الكود</button><button class="small-button" id="codeReviewClear">مسح</button><button class="small-button" id="codeReviewDownload">تصدير التقرير</button></div><div id="codeReviewResult" class="titan-output" aria-live="polite"></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-api-market">
+          <div class="page-title"><span class="eyebrow">ESKO API MARKET</span><h1>🔌 سوق واجهات البرمجة</h1><p>كتالوج تعليمي لمصادر APIs العامة وروابط توثيقها، مع اختبار GET عند سماح المصدر باتصالات CORS. لا تُدخل مفاتيح API سرية هنا.</p></div>
+          <div class="panel content-panel"><div class="titan-control-row"><input id="apiMarketSearch" placeholder="ابحث عن API أو تصنيف"><select id="apiMarketCategory"><option value="all">كل التصنيفات</option><option value="data">بيانات عامة</option><option value="dev">تطوير</option><option value="weather">طقس</option><option value="learning">تعليم وتجربة</option></select></div><div id="apiMarketCards" class="titan-api-grid"></div><div class="titan-api-output" id="apiMarketOutput" aria-live="polite">اختر مصدرًا ثم اختبر طلب GET إن كان متاحًا.</div></div>
+        </section>
+
+        <section class="page titan-page" id="page-ai-training">
+          <div class="page-title"><span class="eyebrow">AI TRAINING LAB</span><h1>🎓 مختبر تعلم الذكاء الاصطناعي</h1><p>تجربة تعليمية مبسطة لتصنيف النصوص: جهّز أمثلة معنونة، جرّب نموذجًا قائمًا على الكلمات، وافهم الفرق بين التدريب والاستدلال. ليست منصة تدريب نماذج إنتاجية.</p></div>
+          <div class="panel content-panel"><div class="titan-form-grid"><label>النص المراد تصنيفه<input id="trainingInput" maxlength="240" placeholder="مثال: أريد تعلم JavaScript"></label><label>الفئة المتوقعة<select id="trainingLabel"><option value="programming">برمجة</option><option value="design">تصميم</option><option value="security">أمان</option></select></label></div><div class="titan-actions"><button class="small-button" id="trainingAddExample">إضافة مثال تدريبي</button><button class="primary-button" id="trainingPredict">جرّب التصنيف</button><button class="small-button" id="trainingReset">إعادة أمثلة البداية</button></div><div class="titan-training-grid"><div><h3>مجموعة الأمثلة</h3><div id="trainingDataset" class="titan-list"></div></div><div><h3>نتيجة النموذج التعليمي</h3><div id="trainingResult" class="titan-output" aria-live="polite">أدخل جملة لاختبارها.</div></div></div><p class="helper-text">النتيجة تعتمد على مطابقة كلمات بسيطة ولا تعكس دقة نموذج تعلم آلي حقيقي.</p></div>
+        </section>
+
+        <section class="page titan-page" id="page-project-manager">
+          <div class="page-title"><span class="eyebrow">PROJECT MANAGER</span><h1>📋 مدير المشاريع</h1><p>أنشئ مشروعات محلية، أضف مهامًا، تابع الحالة والإنجاز، وصدّر بيانات العمل.</p></div>
+          <div class="panel content-panel"><form id="pmProjectForm" class="titan-form-grid"><label>اسم المشروع<input name="name" maxlength="70" required></label><label>التقنية<input name="stack" maxlength="80" placeholder="JavaScript / Python"></label><label>موعد مستهدف<input name="due" type="date"></label><label>الحالة<select name="status"><option value="active">قيد التنفيذ</option><option value="planned">مخطط</option><option value="paused">متوقف مؤقتًا</option><option value="done">مكتمل</option></select></label><button class="primary-button">إضافة مشروع</button></form><div class="titan-actions"><input id="pmSearch" placeholder="ابحث في المشاريع"><button class="small-button" id="pmExport">تصدير المشاريع</button></div><div id="pmProjects" class="titan-project-grid"></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-team-workspace">
+          <div class="page-title"><span class="eyebrow">TEAM WORKSPACE</span><h1>👥 مساحة الفريق</h1><p>جهّز قائمة أعضاء وأدوار ومهام فريقك محليًا، وصدّر مساحة العمل لمشاركتها يدويًا. التعاون المباشر بين الأجهزة يحتاج خادمًا وحسابات.</p></div>
+          <div class="panel content-panel"><form id="teamMemberForm" class="titan-form-grid"><label>اسم العضو<input name="name" maxlength="60" required></label><label>الدور<select name="role"><option>مدير مشروع</option><option>مطور</option><option>مصمم</option><option>مراجع</option><option>متعلم</option></select></label><button class="primary-button">إضافة عضو</button></form><div class="titan-actions"><button class="small-button" id="teamExport">تصدير مساحة الفريق</button><label class="small-button titan-file-btn">استيراد مساحة<input type="file" id="teamImport" accept="application/json" hidden></label></div><div id="teamMembers" class="titan-project-grid"></div><div class="titan-note"><b>الحالة الحالية: مساحة محلية</b><p>لا يتم إرسال الدعوات أو الرسائل أو بيانات الأعضاء إلى الإنترنت من هذه الواجهة.</p></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-design-engine">
+          <div class="page-title"><span class="eyebrow">DESIGN ENGINE</span><h1>🎨 محرك التصميم</h1><p>أنشئ لوحات ألوان، متغيرات CSS، وتدرجات قابلة للتصدير لاستخدامها في مشاريعك.</p></div>
+          <div class="panel content-panel"><div class="titan-form-grid"><label>اللون الرئيسي<input type="color" id="designBase" value="#62ddff"></label><label>عدد درجات اللوحة<select id="designSteps"><option value="3">3 درجات</option><option value="5" selected>5 درجات</option><option value="7">7 درجات</option></select></label><label>اسم اللوحة<input id="designName" maxlength="50" value="Titan Nebula"></label><label>نمط الخلفية<select id="designGradient"><option value="radial">سديم شعاعي</option><option value="linear">تدرج خطي</option><option value="solid">لون ثابت</option></select></label></div><div class="titan-actions"><button class="primary-button" id="designGenerate">توليد اللوحة</button><button class="small-button" id="designExportCss">تصدير CSS</button><button class="small-button" id="designSave">حفظ اللوحة</button></div><div id="designPalette" class="titan-palette"></div><div id="designSaved" class="titan-chip-list"></div></div>
+        </section>
+
+        <section class="page titan-page" id="page-cloud-backup">
+          <div class="page-title"><span class="eyebrow">CLOUD BACKUP / ENCRYPTED EXPORT</span><h1>☁ النسخ الاحتياطي المشفّر</h1><p>إنشاء نسخة مشفّرة من بيانات وحدات V8 المحلية واستعادتها. هذه أداة نسخ محلي قابلة للنقل وليست خدمة سحابية متصلة.</p></div>
+          <div class="panel content-panel"><div class="titan-form-grid"><label>كلمة مرور التشفير<input id="backupPassword" type="password" autocomplete="new-password" minlength="10" placeholder="10 أحرف على الأقل"></label><label>ملف النسخة<input id="backupFile" type="file" accept=".esko,.json,application/json"></label></div><div class="titan-actions"><button class="primary-button" id="backupCreate">تشفير وتنزيل نسخة</button><button class="small-button" id="backupRestore">فك التشفير ومعاينة الاستعادة</button><button class="small-button" id="backupConfirmRestore" disabled>تأكيد الاستعادة</button></div><div id="backupStatus" class="titan-output" role="status">لا يتم تضمين كلمات المرور أو مفاتيح API أو بيانات الحسابات.</div></div>
+        </section>
+
+        <section class="page titan-page" id="page-titan-processors">
+          <div class="page-title"><span class="eyebrow">15 SPECIALIZED TITAN ENGINES</span><h1>⚡ محركات TITAN الـ15</h1><p>وحدات صغيرة تؤدي وظائف محددة داخل المتصفح: تنظيم المهام، الفهرسة، المراجعة، الحفظ، وإدارة الموارد. ليست رفعًا لتردد المعالج ولا تسريعًا ماديًا للجهاز.</p></div>
+          <div class="titan-processors-grid" id="titanProcessorCards"></div><div class="panel content-panel"><h3>أدوات المحركات</h3><div class="titan-actions"><button class="primary-button" id="titanTestAll">اختبار المحركات</button><button class="small-button" id="titanExportDiagnostics">تصدير تقرير التشخيص</button></div><div id="titanProcessorReport" class="titan-output" aria-live="polite"></div></div>
+        </section>
+
+
+        <section class="page titan-page" id="page-leveling">
+          <div class="page-title"><span class="eyebrow">ESKO LEVELING · REFERRAL REWARDS</span><h1>🏅 نظام المستويات والإحالات</h1><p>كل مستوى يحتاج 30 نقطة. فتح رابط إحالة لأول مرة في هذا المتصفح يمنح الزائر 15 نقطة محلية. لا تُشارك معلومات شخصية في رابطك.</p></div>
+          <div class="leveling-grid">
+            <article class="panel content-panel level-main"><div class="level-avatar" id="levelAvatar">♙</div><div><small>حسابك المحلي</small><h2 id="levelAccountId">ESKO-USER</h2><p id="levelName">مستكشف ESKO</p></div><div class="level-number"><small>المستوى الحالي</small><strong id="levelNumber">0</strong></div></article>
+            <article class="panel content-panel"><h3>النقاط والتقدم</h3><div class="level-progress-track"><span id="levelProgressFill"></span></div><p id="levelProgressText">0 / 30 نقطة للمستوى التالي</p><div class="level-stats"><span>النقاط <b id="levelPoints">0</b></span><span>الإحالات المفتوحة <b id="levelReferralCount">0</b></span></div></article>
+          </div>
+          <div class="panel content-panel"><h3>مستويات فتح المزايا</h3><div class="level-milestones" id="levelMilestones"></div><p class="helper-text">المستويات المميزة: 1 و2 و3 و6 و9. فتح المستوى يضيف شارة محلية فقط؛ لا يمنح صلاحيات حساب أو دفع.</p></div>
+          <div class="panel content-panel"><h3>رابطك الخاص</h3><p>الرابط يحتوي على معرّف عشوائي غير حساس. مشاركة الرابط لا تكشف اسمك أو رقم هاتفك.</p><div class="referral-link-row"><input id="referralLink" readonly aria-label="رابط الإحالة الخاص"><button class="primary-button" id="referralCopy">نسخ الرابط</button></div><div class="titan-actions"><button class="small-button" id="referralShare">مشاركة الرابط</button><button class="small-button" id="referralRefresh">تحديث الإحصائيات</button></div><p class="helper-text" id="referralStatus" role="status">الإحالات على هذا الإصدار تُسجّل محليًا في المتصفح فقط.</p></div>
+          <div class="panel content-panel"><h3>إعادة تسمية ملفك</h3><div class="titan-actions"><input id="levelDisplayName" maxlength="32" placeholder="اسم مستعار (اختياري)"><button class="small-button" id="levelSaveName">حفظ الاسم</button><button class="small-button" id="levelResetLocal">إعادة ضبط النقاط المحلية</button></div><p class="helper-text">إعادة الضبط تمسح نقاطك وسجل الإحالات المحلي في هذا المتصفح فقط.</p></div>
+          <div class="panel content-panel"><h3>ملاحظة عن المكافآت</h3><p>المكافآت العابرة للأجهزة تحتاج خادمًا موثوقًا يمنع التكرار والحسابات الوهمية. بدون خادم، لا يمكن للموقع معرفة أن زائرًا آخر فتح الرابط من جهاز مختلف، لذلك هذا نظام تجريبي محلي وليس نظام نقاط عالمي.</p></div>
+        </section>
+        <section class="page titan-page" id="page-feature-lab">
+          <div class="page-title"><span class="eyebrow">V8.3 · 12 MODULES × 50 FEATURE ITEMS</span><h1>🧬 Feature Lab</h1><p>600 عنصر تطوير موزّع على 12 قسمًا، مع خمس وحدات مساعدة لكل قسم. هذا كتالوج تفعيل/إعدادات محلية؛ العناصر المعروضة ليست كلها وظائف مستقلة مكتملة.</p></div>
+          <div class="panel content-panel"><div class="titan-form-grid"><label>القسم<select id="featureSectionSelect"></select></label><label>بحث عن ميزة<input id="featureSearch" placeholder="اكتب اسم الميزة"></label></div><div class="feature-summary"><span>العناصر في القسم <b id="featureCount">50</b></span><span>المفعّل محليًا <b id="featureEnabledCount">0</b></span><span>المعالجات <b id="featureProcessorCount">5</b></span></div><div class="feature-actions"><button class="small-button" id="featureEnableVisible">تفعيل الظاهر</button><button class="small-button" id="featureDisableVisible">إيقاف الظاهر</button><button class="small-button" id="featureExport">تصدير الإعدادات</button></div><div id="featureCards" class="feature-cards"></div></div>
+          <div class="panel content-panel"><h3>المعالجات الخمسة لكل قسم</h3><div id="sectionProcessorCards" class="section-processors"></div><button class="primary-button" id="featureRunProcessors">اختبار معالجات القسم</button><div id="featureProcessorReport" class="titan-output" role="status"></div></div>
+          <div class="panel content-panel"><h3>الإجمالي</h3><div class="feature-summary"><span>الأقسام <b>12</b></span><span>الميزات <b>600</b></span><span>المعالجات الإضافية <b>60</b></span></div><p class="helper-text">المعالجات هنا وحدات JavaScript خفيفة للتحقق والجدولة والتخزين المؤقت والقياس. لا تزيد تردد CPU/GPU ولا تضمن تسريعًا ماديًا.</p></div>
+        </section>
+
+        <section class="page titan-page" id="page-main-processor">
+          <div class="page-title"><span class="eyebrow">ESKO V8.3 · TITAN MAIN PROCESSOR</span><h1>🚀 المعالج الرئيسي ومحركات التسريع</h1><p>مركز موحد لتنظيم مهام الواجهة وتحسين التحميل والاستجابة واستهلاك الموارد داخل الموقع ونسخة PWA. التحسينات برمجية آمنة ولا تتحكم في تردد CPU/GPU أو حرارة الجهاز.</p></div>
+          <div class="panel content-panel titan-main-hero">
+            <div><span class="processor-orb">♾</span><h2> TITAN ORCHESTRATOR · BIG PROCESSOR</h2><p>يشغّل مهام التحسين على دفعات صغيرة ومتتابعة، ويترك المتصفح يتولى جدولة الوقت المناسب حتى لا تتجمّد الواجهة.</p></div>
+            <div class="titan-main-actions"><button class="primary-button" id="titanMainRun">تشغيل المعالج الرئيسي</button><button class="small-button" id="titanDiagnostics">مراجعة شاملة الآن</button><button class="small-button" id="titanExportReport">تصدير تقرير المراجعة</button></div>
+            <div class="processor-metrics"><span>الحالة <b id="titanPerfStatus">جاهز</b></span><span>نوع الجهاز <b id="titanDeviceTier">تلقائي</b></span><span>الاتصال <b id="titanOnlineStatus">—</b></span><span>المهام <b id="titanTaskCount">0</b></span></div>
+            <div class="processor-progress"><span id="titanProcessorProgress"></span></div>
+            <pre id="titanProcessorLog" class="titan-output" role="status" aria-live="polite">لم يتم تشغيل المعالج بعد.</pre>
+          </div>
+          <div class="panel content-panel"><h3>⚙ أوضاع الأداء</h3><p>اختر الوضع المناسب؛ الوضع الخفيف يقلل المؤثرات والحركة فقط، ولا يغيّر إعدادات النظام أو سرعة الهاتف.</p><div class="titan-actions"><button class="small-button" id="titanModeAuto">تلقائي</button><button class="small-button" id="titanModeBalanced">متوازن</button><button class="small-button" id="titanModeLite">خفيف للهاتف</button><button class="small-button" id="titanMotionToggle">تبديل تقليل الحركة</button><button class="small-button" id="titanFocusToggle">وضع التركيز</button></div><p id="titanModeStatus" class="helper-text">الوضع التلقائي يراعي تفضيلات الحركة وقدرات المتصفح.</p></div>
+          <div class="panel content-panel"><h3>🧠 المعالجات الفرعية</h3><div class="titan-v82-grid">
+            <article class="titan-v82-card"><b>01 · Smart Task Queue</b><p>جدولة المهام الصغيرة بترتيب واضح.</p><button class="small-button" data-titan-action="queue">اختبار قائمة المهام</button></article>
+            <article class="titan-v82-card"><b>02 · Image Stream</b><p>تحميل الصور عند الحاجة مع فك ترميز غير متزامن.</p><button class="small-button" data-titan-action="images">تحسين تحميل الصور</button></article>
+            <article class="titan-v82-card"><b>03 · Motion Guard</b><p>تقليل الحركة واحترام إعدادات سهولة الوصول.</p><button class="small-button" data-titan-action="motion">تطبيق إعداد الحركة</button></article>
+            <article class="titan-v82-card"><b>04 · Adaptive Quality</b><p>إعداد المؤثرات بحسب الهاتف أو اختيارك.</p><button class="small-button" data-titan-action="quality">ضبط جودة الواجهة</button></article>
+            <article class="titan-v82-card"><b>05 · Memory Sweeper</b><p>تنظيف الذاكرة المؤقتة البرمجية المحدودة.</p><button class="small-button" data-titan-action="memory">تنظيف الذاكرة المؤقتة</button></article>
+            <article class="titan-v82-card"><b>06 · Health Monitor</b><p>قياس حالة التحميل والاتصال وعدد عناصر الصفحة.</p><button class="small-button" data-titan-action="health">فحص صحة الموقع</button></article>
+            <article class="titan-v82-card"><b>07 · Error Sentinel</b><p>تسجيل محلي مختصر للأخطاء دون إرسالها للخارج.</p><button class="small-button" data-titan-action="errors">حالة مراقبة الأخطاء</button></article>
+            <article class="titan-v82-card"><b>08 · Offline Watch</b><p>مراجعة اتصال الإنترنت وتوفر Service Worker.</p><button class="small-button" data-titan-action="offline">فحص وضع عدم الاتصال</button></article>
+            <article class="titan-v82-card"><b>09 · Safe Backup</b><p>نسخ إعدادات ESKO المسموح بها دون كلمات مرور.</p><button class="small-button" data-titan-action="backup">تصدير نسخة إعدادات</button></article>
+            <article class="titan-v82-card"><b>10 · Command Finder</b><p>بحث سريع للانتقال بين أقسام الموقع.</p><button class="small-button" data-titan-action="search">فتح البحث السريع</button></article>
+            <article class="titan-v82-card"><b>11 · Focus Shield</b><p>إخفاء القوائم الجانبية مؤقتًا لتوسيع مساحة العمل.</p><button class="small-button" data-titan-action="focus">تفعيل وضع التركيز</button></article>
+            <article class="titan-v82-card"><b>12 · PWA Bridge</b><p>التحقق من قابلية تثبيت الويب كتطبيق عند دعم المتصفح.</p><button class="small-button" data-titan-action="install">حالة تثبيت التطبيق</button></article>
+          </div></div>
+          <div class="panel content-panel"><h3>🔎 لوحة المراجعة الشاملة</h3><div class="processor-metrics"><span>وقت الصفحة <b id="titanLoadTime">—</b></span><span>عناصر DOM <b id="titanDomCount">—</b></span><span>الصور <b id="titanImageCount">—</b></span><span>الذاكرة <b id="titanMemoryUse">غير متاحة</b></span></div><div id="titanAuditResults" class="titan-audit-results"></div><p class="helper-text">الاختبارات محلية وثابتة ولا تُعد تدقيقًا أمنيًا خارجيًا أو اختبارًا على جهاز Android فعلي.</p></div>
+          <div class="panel content-panel"><h3>🧭 البحث السريع عن الأقسام</h3><p>استخدم Ctrl + K أو Cmd + K لفتح نافذة الأوامر من أي مكان.</p><button class="primary-button" id="titanOpenCommand">فتح نافذة الأوامر</button><p id="titanInstallStatus" class="helper-text">ميزة التثبيت تعتمد على المتصفح أو WebView المستخدم.</p><input type="file" id="titanBackupImportFile" accept="application/json" hidden></div>
+        </section>
+        <section class="page titan-page" id="page-titan-hub">
+          <div class="page-title"><span class="eyebrow">ESKO V8.3 · TITAN ALL-IN-ONE</span><h1>👑 TITAN Command Center</h1><p>مركز موحد للأدوات والمشاريع والتعلم والتخصيص. التصميم TITAN الأسود والأزرق، مع حفظ محلي للبيانات التجريبية.</p></div>
+          <div class="panel content-panel titan-hub-hero"><div><span class="processor-orb">👑</span><h2>ESKO TITAN · ALL FEATURES</h2><p>18 وحدة مترابطة في لوحة واحدة. الخدمات التي تحتاج خادمًا أو ذكاء اصطناعيًا خارجيًا موضحة بوضوح ولا تعمل كخدمة سحابية وهمية.</p></div><div class="titan-hub-stats"><span>المشاريع <b id="titanHubProjectCount">0</b></span><span>إنجازات التعلم <b id="titanHubAcademyCount">0</b></span><span>المفضلة <b id="titanHubFavoriteCount">0</b></span><span>حالة الاتصال <b id="titanHubOnline">—</b></span></div></div>
+          <div class="titan-hub-grid">
+            <article class="titan-hub-card"><div class="hub-icon">🧭</div><b>01 · مركز القيادة</b><p>ملخص المشاريع والمستويات والاتصال.</p><button data-hub-action="dashboard">تحديث لوحة القيادة</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🤖</div><b>02 · مساعد ESKO</b><p>مساعد إرشادي محلي؛ ربط AI الحقيقي يحتاج API وخادم آمن.</p><button data-hub-action="assistant">فتح المساعد</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🏅</div><b>03 · المستويات والإنجازات</b><p>نقاط الإحالة والشارات والمستويات.</p><button data-hub-action="levels">فتح نظام المستويات</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🛒</div><b>04 · سوق الأدوات</b><p>كتالوج تجريبي للمكونات والقوالب.</p><button data-hub-action="market">استعراض السوق</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🏗️</div><b>05 · مصنع التطبيقات</b><p>إنشاء صفحة HTML أولية قابلة للتنزيل.</p><button data-hub-action="appfactory">إنشاء تطبيق مبدئي</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">📁</div><b>06 · مدير المشاريع</b><p>حفظ أسماء المشاريع وملاحظاتها على هذا المتصفح.</p><button data-hub-action="projects">إدارة المشاريع</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">👥</div><b>07 · مساحة الفريق</b><p>مساحة تنظيم محلية؛ التعاون بين الأجهزة يحتاج Backend.</p><button data-hub-action="team">إعداد مساحة الفريق</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">⌘</div><b>08 · الأوامر السريعة</b><p>انتقل لأي قسم باستخدام Ctrl/Cmd + K.</p><button data-hub-action="command">فتح Command Finder</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">💻</div><b>09 · GOD MODE</b><p>محرر نصوص وأكواد بسيط مع تنزيل الملف.</p><button data-hub-action="godmode">فتح محرر المطور</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🔔</div><b>10 · الإشعارات</b><p>رسائل حالة داخل الموقع دون تتبع خارجي.</p><button data-hub-action="notifications">عرض إشعار تجريبي</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🧩</div><b>11 · مكتبة القوالب</b><p>قوالب HTML بسيطة للانطلاق.</p><button data-hub-action="templates">فتح القوالب</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🎓</div><b>12 · ESKO Academy</b><p>دروس قصيرة وتتبع التقدم محليًا.</p><button data-hub-action="academy">فتح الأكاديمية</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🔎</div><b>13 · البحث الشامل</b><p>بحث في أقسام الموقع وأدواته.</p><button data-hub-action="search">بحث في ESKO</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">📰</div><b>14 · مركز التحديثات</b><p>عرض سجل الإصدار وملاحظات التطوير.</p><button data-hub-action="updates">عرض سجل التحديثات</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🛡️</div><b>15 · الخصوصية</b><p>إرشادات البيانات المحلية وتصدير إعدادات مختارة.</p><button data-hub-action="privacy">فتح مركز الخصوصية</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🎨</div><b>16 · الثيمات</b><p>تبديل اللمسات البصرية مع الحفاظ على ثيم TITAN.</p><button data-hub-action="themes">تخصيص التصميم</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">📡</div><b>17 · العمل دون إنترنت</b><p>فحص الاتصال وحالة Service Worker.</p><button data-hub-action="offline">فحص الاتصال</button></article>
+            <article class="titan-hub-card"><div class="hub-icon">🌌</div><b>18 · معرض المجتمع</b><p>معرض أمثلة توضيحية؛ نشر مشاريع المستخدمين يحتاج مراجعة وخادم.</p><button data-hub-action="gallery">استعراض المعرض</button></article>
+          </div>
+          <div class="panel content-panel titan-hub-workbench"><div class="titan-workbench-head"><h3 id="titanHubPanelTitle">🛠️ مساحة العمل</h3><button class="small-button" id="titanHubClosePanel">إغلاق اللوحة</button></div><div id="titanHubPanel" aria-live="polite"><p>اختَر وحدة من البطاقات لفتح أدواتها هنا.</p></div></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="titanCommandPalette" class="titan-command-palette" hidden role="dialog" aria-modal="true" aria-label="البحث السريع">
+      <div class="titan-command-box"><div class="titan-command-head"><b>ESKO COMMAND FINDER</b><button type="button" id="titanCommandClose" aria-label="إغلاق">✕</button></div><input id="titanCommandInput" type="search" placeholder="ابحث عن قسم أو أداة…" autocomplete="off"><div id="titanCommandResults" class="titan-command-results"></div><small>اضغط Esc للإغلاق · Ctrl/Cmd + K للفتح</small></div>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <a class="v5-support-float" data-random-support href="https://wa.me/963993825873" rel="noopener">✉ محادثة الدعم</a>
+    <footer class="v5-main-footer">🛡🛠نازلنا بالبدايه والتطوير 🛠🛡</footer>
+  </div>
+  <audio id="eskoUiAudio" src="assets/esko-interface-theme.mp3" preload="none"></audio>
+  <script src="image-processor.js"></script>
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+  <script src="support-router.js" defer></script>
+  <script src="v5/performance-core.js" defer></script>
+  <script src="v5/performance-90.js" defer></script>
+  <script src="v5/esko-v5.js" defer></script>
+  <script src="v5/security-center.js" defer></script>
+  <script src="v5/education.js" defer></script>
+  <script src="v5/developer-studio.js" defer></script>
+  <script src="v5/galaxy-infinity.js" defer></script>
+  <script src="v5/omniverse-evolution.js" defer></script>
+  <script src="v5/omniverse-advanced-50.js" defer></script>
+  <script src="v5/titan-universe-v80.js" defer></script>
+  <script src="v5/leveling-feature-lab-v81.js" defer></script>
+  <script src="v5/titan-main-processor-v82.js" defer></script>
+  <script src="v5/titan-all-in-one-v83.js" defer></script>
+</body>
+</html>

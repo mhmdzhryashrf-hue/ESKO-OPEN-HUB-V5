@@ -729,15 +729,8 @@
   }
   async function bootAfterNetwork(){
     if(applicationStarted)return;
-    const gate=$('#networkGate'),message=$('#networkMessage'),speedText=$('#networkSpeed'),meter=$('#networkMeterFill'),retry=$('#retryNetwork');
-    gate.classList.remove('hidden');retry.disabled=true;retry.textContent='جارٍ اختبار الاتصال…';message.textContent='جارٍ قياس سرعة الاتصال بالموقع…';
-    try{
-      const speed=await measureNetworkSpeed();
-      speedText.textContent=`السرعة المقاسة: ${(speed/1024).toFixed(2)} KB/s`;
-      meter.style.width=`${Math.min(100,speed/MIN_NETWORK_BYTES_PER_SECOND*100)}%`;
-      if(speed<MIN_NETWORK_BYTES_PER_SECOND){message.textContent='سرعة الاتصال أقل من 2KB/s؛ تحقق من الإنترنت ثم أعد الاختبار.';retry.disabled=false;retry.textContent='إعادة اختبار الاتصال';return;}
-    }catch(error){message.textContent=`${error.message} تحقق من اتصالك بالإنترنت ثم أعد المحاولة.`;speedText.textContent='لم ينجح قياس السرعة.';meter.style.width='0%';retry.disabled=false;retry.textContent='إعادة اختبار الاتصال';return;}
-    retry.disabled=false;retry.textContent='إعادة اختبار الاتصال';gate.classList.add('hidden');applicationStarted=true;
+    $('#networkGate').classList.add('hidden');
+    applicationStarted=true;
     if(location.protocol!=='file:' && window.ESKOImagePipeline){
       try{const image=await window.ESKOImagePipeline.prepareWallpaper('assets/sea-horizon-v5.webp');document.documentElement.style.setProperty('--esko-sea-wallpaper',`url("${image.url}")`);}
       catch(error){console.warn('ESKO wallpaper pipeline:',error.message);}

@@ -1,0 +1,130 @@
+{
+  "version": "5.7",
+  "resourceCount": 20,
+  "languages": [
+    "javascript",
+    "python",
+    "typescript",
+    "html",
+    "css",
+    "sql",
+    "java",
+    "csharp",
+    "cpp",
+    "c",
+    "go",
+    "php",
+    "rust",
+    "kotlin",
+    "swift",
+    "ruby",
+    "dart",
+    "bash",
+    "powershell",
+    "r",
+    "lua"
+  ],
+  "javascriptLessons": 12,
+  "resources": [
+    {
+      "name": "ChatGPT",
+      "type": "ai",
+      "url": "https://chatgpt.com/"
+    },
+    {
+      "name": "Claude",
+      "type": "ai",
+      "url": "https://claude.ai/"
+    },
+    {
+      "name": "Gemini",
+      "type": "ai",
+      "url": "https://gemini.google.com/"
+    },
+    {
+      "name": "GitHub Copilot",
+      "type": "ai",
+      "url": "https://github.com/features/copilot"
+    },
+    {
+      "name": "Microsoft Copilot",
+      "type": "ai",
+      "url": "https://copilot.microsoft.com/"
+    },
+    {
+      "name": "Perplexity",
+      "type": "ai",
+      "url": "https://www.perplexity.ai/"
+    },
+    {
+      "name": "DeepSeek",
+      "type": "ai",
+      "url": "https://chat.deepseek.com/"
+    },
+    {
+      "name": "Qwen Chat",
+      "type": "ai",
+      "url": "https://chat.qwen.ai/"
+    },
+    {
+      "name": "Mistral Le Chat",
+      "type": "ai",
+      "url": "https://chat.mistral.ai/"
+    },
+    {
+      "name": "Cursor",
+      "type": "ai",
+      "url": "https://www.cursor.com/"
+    },
+    {
+      "name": "Google Search",
+      "type": "search",
+      "url": "https://www.google.com/search?q="
+    },
+    {
+      "name": "Bing Search",
+      "type": "search",
+      "url": "https://www.bing.com/search?q="
+    },
+    {
+      "name": "Stack Overflow",
+      "type": "search",
+      "url": "https://stackoverflow.com/search?q="
+    },
+    {
+      "name": "GitHub Code Search",
+      "type": "search",
+      "url": "https://github.com/search?q="
+    },
+    {
+      "name": "MDN Web Docs",
+      "type": "learn",
+      "url": "https://developer.mozilla.org/en-US/search?q="
+    },
+    {
+      "name": "JavaScript.info",
+      "type": "learn",
+      "url": "https://javascript.info/"
+    },
+    {
+      "name": "W3Schools",
+      "type": "learn",
+      "url": "https://www.w3schools.com/"
+    },
+    {
+      "name": "freeCodeCamp",
+      "type": "learn",
+      "url": "https://www.freecodecamp.org/learn/"
+    },
+    {
+      "name": "DevDocs",
+      "type": "learn",
+      "url": "https://devdocs.io/"
+    },
+    {
+      "name": "Exercism",
+      "type": "learn",
+      "url": "https://exercism.org/tracks"
+    }
+  ]
+}
