@@ -1,0 +1,11 @@
+{
+  "name": "مِحور MIHWAR",
+  "short_name": "مِحور",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#071a1b",
+  "theme_color": "#071a1b",
+  "icons": [{"src":"assets/warehouse-security.jpg","sizes":"512x512","type":"image/jpeg","purpose":"any"}]
+}

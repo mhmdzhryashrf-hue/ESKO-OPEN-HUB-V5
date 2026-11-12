@@ -1,0 +1,20 @@
+طريقة رفع MIHWAR V1.1 إلى مستودع ESKO من Termux
+
+1) فك ضغط الحزمة.
+2) افتح Termux وانتقل إلى مجلد mihwar_build.
+3) نفّذ:
+   pkg update -y
+   pkg install -y git
+   bash scripts/upload-to-github.sh
+4) أدخل اسم مستخدم GitHub ثم Personal Access Token عند الطلب.
+
+السكربت يرفع مجلد MIHWAR-V1.1 إلى فرع مستقل باسم يبدأ بـ mihwar-v1.1-upload-
+داخل المستودع:
+https://github.com/mhmdzhryashrf-hue/ESKO-OPEN-HUB-V5
+ولا يعدّل main.
+
+ملاحظات مهمة:
+- لا ترسل التوكن لأي شخص ولا تضعه داخل المحادثة.
+- استخدم توكناً بصلاحية Contents: Read and write لهذا المستودع (أو صلاحية repo المناسبة حسب نوع التوكن).
+- إذا كان المستودع خاصاً أو لا تملك صلاحية الكتابة، سيفشل الرفع برسالة من GitHub.
+- التوكن يُطلب بشكل مخفي ولا يُحفظ في ملفات المشروع؛ يحذف السكربت ملف المصادقة المؤقت عند الخروج.

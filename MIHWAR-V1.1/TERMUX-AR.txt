@@ -1,0 +1,19 @@
+تشغيل مِحور على Termux:
+
+1) فك ضغط MIHWAR-V1.1-Implementation.zip.
+2) افتح Termux ثم نفذ:
+   pkg update -y
+   pkg install -y python unzip git
+3) ادخل مجلد المشروع:
+   cd MIHWAR-V1.1-Implementation
+4) تحقق من الملفات:
+   bash scripts/verify.sh
+5) شغل الموقع:
+   bash scripts/termux-start.sh
+6) افتح المتصفح على:
+   http://127.0.0.1:8080
+
+رفع المشروع إلى GitHub (اختياري):
+   bash scripts/upload-to-github.sh
+
+سيُنشأ فرع جديد ولن يتم تعديل main. لن تطلب منك المحادثة كلمة مرور أو GitHub token؛ أدخل بيانات المصادقة محلياً في Termux فقط عند مطالبة Git بذلك.

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071a1b">
+  <meta name="description" content="مِحور MIHWAR — مجتمع ومحتوى ومحادثات ومستودعات وسوق ومساعد ذكي">
+  <title>مِحور MIHWAR</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/warehouse-security.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="البيت">
+      <span class="brand-mark">م</span>
+      <span class="brand-copy"><b>مِحور</b><small>MIHWAR · مساحة واحدة</small></span>
+    </a>
+    <div class="global-search"><span>⌕</span><input id="global-search" type="search" placeholder="ابحث في المحتوى والملفات والمنتجات…" aria-label="بحث موحد"><kbd>بحث</kbd></div>
+    <div class="top-actions">
+      <button class="top-btn assistant-launch" id="assistant-open" type="button"><span>✦</span> المساعد</button>
+      <button class="top-btn" id="modules-open" type="button">▦ <span>مراكز مِحور</span></button>
+      <button class="avatar-button" id="account-shortcut" type="button" aria-label="الحساب">م</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="welcome-strip">
+      <div><span class="eyebrow">MIHWAR DIGITAL SPACE</span><h1 id="view-title">البيت</h1><p id="view-subtitle">المحتوى والبحث والاكتشاف في مكان واحد.</p></div>
+      <div class="welcome-meta"><span class="local-indicator"><i></i> وضع العمل المحلي</span><span id="saved-count">0 عنصر محفوظ</span></div>
+    </section>
+
+    <section id="view" class="view" aria-live="polite"></section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="أقسام مِحور الرئيسية">
+    <button class="nav-item active" data-page="home" type="button"><span>⌂</span><small>البيت</small></button>
+    <button class="nav-item" data-page="settings" type="button"><span>⚙</span><small>الإعدادات</small></button>
+    <button class="nav-item" data-page="discussions" type="button"><span>◌</span><small>المناقشات</small></button>
+    <button class="nav-item" data-page="repositories" type="button"><span>▤</span><small>المستودعات</small></button>
+    <button class="nav-item" data-page="store" type="button"><span>▣</span><small>المتجر</small></button>
+    <button class="nav-item" data-page="account" type="button"><span>◎</span><small>الحساب</small></button>
+  </nav>
+
+  <dialog id="assistant-dialog" class="modal assistant-modal">
+    <form method="dialog" class="modal-top"><div><span class="modal-kicker">MIHWAR AI</span><h2>المساعد الذكي</h2><p>مساعد محلي للقواعد والبحث والصياغة؛ لا يتصل بنموذج توليدي خارجي في هذه الحزمة.</p></div><button class="close-btn" aria-label="إغلاق">×</button></form>
+    <div id="assistant-log" class="assistant-log"><div class="assistant-message bot">أستطيع البحث في بياناتك المحلية أو تلخيص منشوراتك أو إعداد مسودة. لن أنشر أو أحذف أو أرسل شيئاً نيابة عنك.</div></div>
+    <form id="assistant-form" class="assistant-form"><input id="assistant-input" placeholder="اكتب طلبك…" maxlength="1200" required><button class="primary-btn">إرسال</button></form>
+    <div class="quick-prompts"><button type="button" data-prompt="لخص منشوراتي المحلية">تلخيص منشوراتي</button><button type="button" data-prompt="ابحث عن تعلم البرمجة">بحث في المحتوى</button><button type="button" data-prompt="اكتب مسودة منشور عن مشروع جديد">صياغة مسودة</button></div>
+  </dialog>
+
+  <dialog id="modules-dialog" class="modal wide-modal">
+    <form method="dialog" class="modal-top"><div><span class="modal-kicker">MIHWAR ECOSYSTEM</span><h2>مراكز ووحدات مِحور</h2><p>كتالوج الوحدات الإضافية الـ25 الواردة في تحديث المواصفات.</p></div><button class="close-btn" aria-label="إغلاق">×</button></form>
+    <div class="core-centers" id="core-centers"></div>
+    <div class="module-tools"><input id="module-search" placeholder="ابحث عن وحدة…"><span id="module-count"></span><button class="secondary-btn" data-action="new-studio-draft" type="button">إنشاء مخطط في Studio</button></div>
+    <div id="module-grid" class="module-grid"></div>
+    <div class="catalog-launch"><button id="commands-open" class="secondary-btn" type="button">فتح كتالوج الأوامر والسيناريوهات</button><a href="docs/IMPLEMENTATION-MATRIX-AR.md" target="_blank" rel="noopener">مصفوفة التنفيذ</a><a href="academy/ESKO_CPP_Book_80_Pages.pdf" target="_blank" rel="noopener">كتاب C++</a><a href="academy/ESKO_JavaScript_Book_80_Pages.pdf" target="_blank" rel="noopener">كتاب JavaScript</a></div>
+  </dialog>
+
+  <dialog id="commands-dialog" class="modal wide-modal">
+    <form method="dialog" class="modal-top"><div><span class="modal-kicker">COMMAND & QA REGISTRY</span><h2>كتالوج الأوامر والاختبارات</h2><p>المعرّفات تُولّد عند الطلب، ولا تُعامل كوظائف منفذة ما لم يوجد تنفيذ واختبار.</p></div><button class="close-btn" aria-label="إغلاق">×</button></form>
+    <div class="catalog-stats" id="catalog-stats"></div>
+    <div class="command-search"><input id="command-query" placeholder="مثال: H-F031-V0001 أو UPD2-01-CMD-01"><button id="command-search-btn" class="primary-btn" type="button">تحقق من المعرّف</button></div>
+    <div id="command-result" class="command-result"><p>أدخل معرّفاً للبحث في الكتالوج.</p></div>
+    <div class="catalog-tabs"><button class="active" data-catalog-tab="core">الأوامر الأساسية</button><button data-catalog-tab="update">أوامر التحديث الثاني</button><button data-catalog-tab="scenarios">السيناريوهات</button></div>
+    <div id="catalog-list" class="catalog-list"></div>
+  </dialog>
+
+  <dialog id="confirm-dialog" class="modal confirm-modal">
+    <form method="dialog" class="modal-top"><h2 id="confirm-title">تأكيد الإجراء</h2><button class="close-btn" aria-label="إغلاق">×</button></form>
+    <p id="confirm-message"></p><div class="confirm-actions"><button id="confirm-cancel" class="secondary-btn" type="button">إلغاء</button><button id="confirm-yes" class="danger-btn" type="button">تأكيد</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer class="app-footer">مِحور MIHWAR · نسخة محلية قابلة للتجربة · البيانات محفوظة على هذا الجهاز فقط حتى ربط الخادم.</footer>
+</body>
+</html>

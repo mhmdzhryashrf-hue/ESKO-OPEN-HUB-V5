@@ -1,0 +1,7 @@
+MIHWAR V1.1 implementation package
+web/             Offline-first responsive PWA prototype
+catalog/         Core and Update 02 catalog data
+android/         Android WebView source project
+scripts/         Local verification and Termux upload helpers
+docs/specs/      Original uploaded product blueprints
+docs/books/     Original uploaded learning books
